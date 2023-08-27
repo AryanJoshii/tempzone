@@ -6,7 +6,8 @@ $(function () {
             email: $("#email").val(),
             password: $("#password").val()
         }
-        url = "http://localhost/tempzone/server/api/user.php";
+        var baseUrl = window.tempzone.baseurl; 
+        var url = baseUrl +"/tempzone/server/api/user.php?exist";
         $.ajax({
             type: "POST",
             url: url,
