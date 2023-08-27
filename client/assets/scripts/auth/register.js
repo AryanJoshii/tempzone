@@ -6,5 +6,22 @@ $(function () {
             email: $("#email").val(),
             password: $("#password").val()
         }
+        url = "http://localhost/tempzone/server/api/user.php";
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: data,
+            success: function(response){
+                if(response.response == "not-exist"){
+                    alert("user registered successfully !")
+                }
+                if(response.response == "exist"){
+                    alert("username is exist try another one!")
+                }
+            },
+            error:function(){
+                alert("Oops, something went wrong. Please try agian later.")
+            }
+        });
     })
 })
