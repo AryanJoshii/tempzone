@@ -7,7 +7,7 @@ $(function () {
             password: $("#password").val()
         }
         var baseUrl = window.tempzone.baseurl; 
-        var url = baseUrl +"/tempzone/server/api/user.php?exist";
+        var url = baseUrl +"/tempzone/api/user.php?exist";
         $.ajax({
             type: "POST",
             url: url,
@@ -20,7 +20,8 @@ $(function () {
                     alert("username is exist try another one!")
                 }
             },
-            error:function(){
+            error:function(xhr){
+                console.log(xhr);
                 alert("Oops, something went wrong. Please try agian later.")
             }
         });
