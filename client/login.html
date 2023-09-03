@@ -5,18 +5,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - TempZone</title>
-    <link rel="stylesheet" href="styles/global.css">
+    <link rel="stylesheet" href="assets/styles/global.css">
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="assets/scripts/require.js" defer></script>
     <script src="assets/scripts/jquery.js" defer></script>
-    <script src="assets/scripts/auth/login.js" defer></script>
+    <script type="module" src="assets/scripts/auth/login.js" defer></script>
 </head>
 
 <body>
-    <div class="flex h-screen bg-slate-600 justify-center items-center">
-        <div class="flex flex-col w-[400px] bg-slate-100 rounded-md items-center py-5 px-5">
+    <div class="flex h-screen justify-center items-center">
+        <div class="flex flex-col w-[400px] shadow-xl shadow-slate-300 bg-slate-100 rounded-md items-center py-5 px-5">
             <h1 class="text-4xl font-bold">Welcome back!</h1>
-            <form id="registerform" class="flex flex-col w-full">
+            <form id="loginForm" class="flex flex-col w-full">
                 <label for="email" class="mt-5">Email *</label>
                 <input class="p-[5px] rounded-md" type="email" name="email" id="email" required />
                 <label for="password" class="mt-5">Password *</label>
