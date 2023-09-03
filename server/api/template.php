@@ -24,14 +24,3 @@ if(isset($_GET["exist"])){
         echo json_encode($data);
     }
 }
-if(isset($_POST["password"]) && isset($_POST["email"]) && isset($_GET["login"])){
-    $email = $_POST["email"];
-    $password = $_POST["password"];
-    $registeredUsers = $database->userLogin($email,$password);
-    if(count($registeredUsers) > 0){
-        $data = [ 'verified' => 'true', 'error' => 0 ];
-    }else{
-        $data = [ 'verified' => 'false', 'error' => 1 ];
-    }
-    echo json_encode($data);
-}
