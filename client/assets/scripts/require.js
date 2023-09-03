@@ -1,2 +1,1 @@
-window.tempzone = {};
-window.tempzone.baseurl = "http://localhost";
+export const API_URL =  "http://localhost/tempzone/api";
