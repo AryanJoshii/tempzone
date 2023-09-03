@@ -13,7 +13,6 @@ $(function () {
             url: url,
             data: data,
             success: function(response){
-                console.log(response)
                 if(response.verified == "true"){
                     window.location.replace("index.html");
                 }else {

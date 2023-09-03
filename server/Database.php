@@ -3,8 +3,8 @@ class Database
 {
     protected $connection = null;
     const USER_ID = "user_id";
-    const USER_NAME = "username";
-    const USER_EMAIL = "email";
+    const USER_NAME = "user_name";
+    const USER_EMAIL = "user_email";
     const USER_PASSWORD = "password";
 
     public function __construct()
@@ -30,11 +30,12 @@ class Database
     }
     public function getUsersName()
     {
-        $users = $this->select("SELECT username FROM registered_users","username"); 
+        $users = $this->select("SELECT user_name FROM registered_users","user_name"); 
         return $users;
     }
     public function userLogin($email,$password)
     {
+        $password = md5($password);
         $sql = "SELECT * FROM registered_users WHERE ".self::USER_EMAIL."= '".$email."' && ".self::USER_PASSWORD."= '".$password."'";
         $users = $this->select($sql); 
         return $users;
@@ -42,11 +43,16 @@ class Database
     public function createUser($values)
     {
         $stringsValue = array("NULL");
-        foreach ($values as $value) {
-            $stringsValue[] = '"' .$value. '"';
+        foreach ($values as $key => $value) {
+            if($key == "password"){
+                $value = md5($value);
+                $stringsValue[] = '"' .$value. '"';
+            }else{
+                $stringsValue[] = '"' .$value. '"';
+            }
         }
         $stringsValues = implode(",", $stringsValue);
-        $sql = 'INSERT INTO registered_users VALUES ('.$stringsValues.')';
+        $sql = 'INSERT INTO registered_users VALUES ('.$stringsValues.',now(),now())';
         $users = $this->executeStatement($sql); 
         return $users;
     }
