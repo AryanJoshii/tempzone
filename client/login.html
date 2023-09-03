@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - TempZone</title>
+    <link rel="stylesheet" href="assets/styles/global.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="assets/scripts/jquery.js" defer></script>
+    <script type="module" src="assets/scripts/auth/login.js" defer></script>
+</head>
+
+<body>
+    <div class="flex h-screen justify-center items-center">
+        <div class="flex flex-col w-[400px] shadow-xl shadow-slate-300 bg-slate-100 rounded-md items-center py-5 px-5">
+            <h1 class="text-4xl font-bold">Welcome back!</h1>
+            <form id="loginForm" class="flex flex-col w-full">
+                <label for="email" class="mt-5">Email *</label>
+                <input class="p-[5px] rounded-md" type="email" name="email" id="email" required />
+                <label for="password" class="mt-5">Password *</label>
+                <input class="p-[5px] rounded-md" type="password" name="password" id="password" required />
+                <button type="submit" class="mt-5 bg-blue-400 text-white py-1 rounded-md">Login</button>
+                <div class="mt-5 text-center">New here!? Then
+                    <a href="register.html" class="text-blue-600 cursor-pointer hover:underline hover:underline-offset-1">Register</a>
+                    na!
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
