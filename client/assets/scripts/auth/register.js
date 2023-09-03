@@ -1,29 +1,28 @@
-$(function () {
-    $("#registerform").on("submit", (e) => {
-        e.preventDefault();
-        let data = {
-            username: $("#username").val(),
-            email: $("#email").val(),
-            password: $("#password").val()
-        }
-        var baseUrl = window.tempzone.baseurl; 
-        var url = baseUrl +"/tempzone/api/user.php?exist";
-        $.ajax({
-            type: "POST",
-            url: url,
-            data: data,
-            success: function(response){
-                if(response.response == "not-exist"){
-                    alert("user registered successfully !")
-                }
-                if(response.response == "exist"){
-                    alert("username is exist try another one!")
-                }
-            },
-            error:function(xhr){
-                console.log(xhr);
-                alert("Oops, something went wrong. Please try agian later.")
-            }
-        });
-    })
-})
+import { API_URL } from "../require.js";
+
+console.log(API_URL);
+
+const loginForm = document.getElementById("registerform");
+loginForm.addEventListener("submit", submitLoginForm)
+
+async function submitLoginForm(e) {
+    e.preventDefault();
+    let data = new FormData(this);
+    let dataObj = {}
+    data.forEach((value, key) => {
+        dataObj[key] = value;
+    });
+
+    console.log(dataObj);
+
+    try {
+        const loginResponse = await fetch(`${API_URL}/user/register.php`, {
+            mode: "no-cors",
+            method: "POST",
+            body: JSON.stringify(dataObj)
+        })
+        console.log(loginResponse);
+    } catch (error) {
+        console.log(error);
+    }
+}

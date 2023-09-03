@@ -9,14 +9,14 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="assets/scripts/jquery.js" defer></script>
     <script src="assets/scripts/require.js" defer></script>
-    <script src="assets/scripts/auth/register.js" defer></script>
+    <script type="module" src="assets/scripts/auth/register.js" defer></script>
 </head>
 
 <body>
     <div class="flex h-screen justify-center items-center">
         <div class="flex flex-col w-[400px] shadow-lg shadow-slate-300 bg-slate-100 rounded-md items-center py-5 px-5">
             <h1 class="text-4xl font-bold">New here!?</h1>
-            <form id="registerform" class="flex flex-col w-full" onsubmit="$">
+            <form id="registerform" class="flex flex-col w-full">
                 <label for="username" class="mt-5">Username *</label>
                 <input class="p-[5px] rounded-md" type="text" name="username" id="username" required />
                 <label for="email" class="mt-5">Email *</label>
