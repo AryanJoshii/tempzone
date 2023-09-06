@@ -1,4 +1,6 @@
-$(function () {
+import { elementHeight } from "../utills.js";
+
+function appendNavbar() {
     //navbar
     let nav = document.createElement('header');
     nav.id = "navbar"
@@ -22,19 +24,19 @@ $(function () {
     let profile = document.createElement('div');
     profile.className = "rounded-full w-8 h-8 bg-black";
 
-    rightDiv.append(toggleBtn, profile)
+    rightDiv.append(toggleBtn, profile);
     nav.append(logo, rightDiv);
 
-    $(document.body).prepend(nav);
+    document.body.insertAdjacentElement("afterbegin", nav);
+}
 
-    $("#sidebarToogle").on("click", () => {
-        $("#sidebar").animate({
-            width: '100px',
-        })
-        $("#pages").animate().addClass("left-[100px] w-[calc(100%-100px)]")
-    })
+function calcHeightOfElements() {
+    const elemHeight = elementHeight(document.getElementById("navbar"));
+    const elementBar = document.getElementById("element-container");
+    elementBar.style.height = `calc(100vh - ${elemHeight}px)`
+}
 
-    $(window).on('load', () => {
-        $("#pages").addClass(`h-[calc(100vh-${$("#navbar").outerHeight()}px)]`);
-    })
+window.addEventListener("load", () => {
+    appendNavbar();
+    calcHeightOfElements();
 })

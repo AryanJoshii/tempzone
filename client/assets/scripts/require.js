@@ -1,1 +1,1 @@
-export const API_URL =  "http://localhost/tempzone/server/api";
+export const API_URL =  "http://localhost/tempzone/api";

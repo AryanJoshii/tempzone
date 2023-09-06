@@ -30,8 +30,6 @@
 
 import { API_URL } from "../require.js";
 
-console.log(API_URL);
-
 //     })
 // })
 
@@ -54,7 +52,7 @@ async function submitLoginForm(e) {
             method: "POST",
             body: JSON.stringify(dataObj)
         })
-        console.log(loginResponse);
+        console.log(loginResponse.json());
     } catch (error) {
         console.log(error);
     }
