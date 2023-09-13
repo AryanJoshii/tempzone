@@ -74,6 +74,16 @@ class User
             return $rows;
         }
     }
+    public function encryptToken($data)
+    {
+        $token = openssl_encrypt($data,"AES-128-ECB","(!@#)(#@!)");
+        return $token;
+    }
+    public function decryptToken($token)
+    {
+        $decrypted_token = openssl_decrypt($token,"AES-128-ECB","(!@#)(#@!)");
+        return $decrypted_token;
+    }
     private function executeStatement($query)
     {
         $result = $this->connection->query($query);
