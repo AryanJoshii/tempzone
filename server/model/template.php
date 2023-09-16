@@ -3,14 +3,16 @@ require_once('database.php');
 
 class Template
 {
+    private $database; 
+    private $connection;
+    
     public function __construct()
     {
         $this->database = new Database();
         $this->connection = $this->database->getConnection();
     }
     public function createTemplate($token){
-        $data = $this->decryptToken($token);  
-        $decryptedData = explode(",",$data);
+        $decryptedData = $this->decryptToken($token);
         $user_id = $decryptedData[0];
         $user_name = $decryptedData[1];
         $sql = "INSERT INTO " . Database::TEMPLATE_TABLE . " VALUES (NULL, NULL,NULL,NULL, ".$user_id.", NOW(), NOW())"; 
@@ -19,25 +21,19 @@ class Template
         return $newlyTemplate;
     }
     public function updateTemplate($token,$template_data){
-        $data = $this->decryptToken($token);  
-        $decryptedData = explode(",",$data);
+        $decryptedData = $this->decryptToken($token);
         // $user_id = $decryptedData[0];
         $sql ="UPDATE ".Database::TEMPLATE_TABLE." SET `template_name` = '".$template_data["template_name"]."', `template_tags` = '".json_encode($template_data["template_tags"])."', `template_category` = '".$template_data["template_category"]."',  `template_owner` = ".$template_data["template_owner"]."  WHERE `template_id` = ".$template_data["template_id"];
         $result = $this->connection->query($sql); 
         return $result;
     }
-    public function fetchTemplate($token,$template_id,$fetchAllTemplate){
-        $data = $this->decryptToken($token);
-        $decryptedData = explode(",",$data);
+    public function fetchTemplate($token, $template_id = 0){
+        $decryptedData = $this->decryptToken($token);
         $user_id = $decryptedData[0];
-        switch(true){
-            case $fetchAllTemplate:
-                exit("exit");
-                $sql ="SELECT * FROM ".Database::TEMPLATE_TABLE;    
-                break;
-            case $template_id:
-                $sql ="SELECT * FROM ".Database::TEMPLATE_TABLE." WHERE `template_id` =".$template_id;    
-            break;
+        if($template_id){
+            $sql ="SELECT * FROM ".Database::TEMPLATE_TABLE." WHERE `template_id` =".$template_id;
+        }else{
+            $sql ="SELECT * FROM ".Database::TEMPLATE_TABLE; 
         }
         $result = $this->connection->query($sql);
         $records = [];
@@ -49,7 +45,7 @@ class Template
     public function decryptToken($token)
     {
         $decrypted_token = openssl_decrypt($token,"AES-128-ECB","(!@#)(#@!)");
-        return $decrypted_token;
+        return explode(",",$decrypted_token) ;
     }
 }
 ?>

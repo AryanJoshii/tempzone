@@ -2,6 +2,10 @@
 class Database
 {
     private $connection;
+    private $host;
+    private $username;
+    private $password;
+    private $database;
 
     const USER_ID = "user_id";
     const USER_NAME = "user_name";

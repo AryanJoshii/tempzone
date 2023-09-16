@@ -11,11 +11,10 @@ header('Content-type: application/json');
 $request = json_decode(file_get_contents('php://input'), true);
 
 $request["token"]= "";
-$request["template_id"] = 25;
+$request["fetch_all"] = true;
 
-if(isset($request["token"]) && isset($request["template_id"])){
-        
-    $response = $database->fetchTemplate($request["token"],$request["template_id"]);
+if(isset($request["token"]) && isset($request["fetch_all"])){    
+    $response = $database->fetchTemplate($request["token"]);
     if(0 < count($response)){
         $data = [ 'status' => 202, 'data' => json_encode($response) ,'msg' => "Template Fetched Successful.",'error' => 0 ];
         http_response_code(202);
