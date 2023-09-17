@@ -28,7 +28,7 @@ $createAdminTableQuery = "CREATE TABLE IF NOT EXISTS `admin` (
   `email` varchar(256) NOT NULL,
   `access` varchar(256) NOT NULL,
   PRIMARY KEY (`admin_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci";
+)";
 
 if ($conn->query($createAdminTableQuery) === TRUE) {
     echo "Admin table created successfully \n";
@@ -38,11 +38,11 @@ if ($conn->query($createAdminTableQuery) === TRUE) {
 
 $createUsersTableQuery = "CREATE TABLE IF NOT EXISTS `registered_users` ( 
   `user_id` int NOT NULL AUTO_INCREMENT,
-  `user_name` varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `user_email` varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `token` varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `password` varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `template_created` varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `user_name` varchar(256)  NOT NULL,
+  `user_email` varchar(256)  NOT NULL,
+  `token` varchar(256)  NOT NULL,
+  `password` varchar(256)  NOT NULL,
+  `template_created` varchar(256)  NOT NULL,
   `registered_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`user_id`)

@@ -23,5 +23,5 @@ if(isset($request["token"]) && isset($request["template_id"])){
         $data = [ 'status' => 404, 'data' => json_encode($request["token"]) ,'msg' => "Error Occurce In Fetch Template. Please try again.",'error' => 0 ];
         http_response_code(404);
     }
-    echo json_encode($data);
+    return json_encode($data);
 }

@@ -14,13 +14,11 @@ if(isset($request["password"]) && isset($request["email"])){
     $email = $request["email"];
     $password = $request["password"];
     $registeredUsers = $user->userLogin($email,$password);
-    
     if(count($registeredUsers) > 0){
         if(isset($registeredUsers[0]["user_id"]) && isset($registeredUsers[0]["user_name"])){
-            
            $token = $user->encryptToken($registeredUsers[0]["user_id"].",".$registeredUsers[0]["user_name"]);
         }
-        $data = [ 'status' => 202, 'data' => json_encode(array($email,$password)) ,'token' => $token, 'msg' => "Login successful.",'error' => 0 ];
+        $data = [ 'status' => 202, 'data' => json_encode(array("userInfo" => $registeredUsers[0], "token" => $token)) , 'msg' => "Login successful.",'error' => 0 ];
         http_response_code(202);
     }else{
         $data = [ 'status' => 404, 'data' => json_encode(array($email,$password)) ,'msg' => "Login failed: Incorrect email or password. Please try again.",'error' => 0 ];
@@ -28,3 +26,4 @@ if(isset($request["password"]) && isset($request["email"])){
     }
     echo json_encode($data);
 }
+

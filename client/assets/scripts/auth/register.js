@@ -16,8 +16,14 @@ async function submitLoginForm(e) {
             mode: "no-cors",
             method: "POST",
             body: JSON.stringify(dataObj)
-        })
-        console.log(loginResponse);
+        });
+        const responseData = await loginResponse.json();
+        if (responseData.status == 200) {
+            const userData = responseData.data;
+            window.location.href = "login.html"
+        }
+        alert(responseData.msg)
+
     } catch (error) {
         console.log(error);
     }

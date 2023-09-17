@@ -14,19 +14,32 @@ if(isset($request) && !empty($request)){
     $username = $request["username"];
     $password = $request["password"];    
     $registeredUsers =  $database->getUsersName();
-    if(!in_array($username,$registeredUsers)){
-        $array = ["username" => $username, "email" => $email, "password" => $password,NULL];
-        $response = $database->createUser($array);
-        $recentkyRegisteredUsers = $database->findByField("user_name",$username);
-        $users_id ;
-        $users_name ;
-        $count = count($recentkyRegisteredUsers);
-        list($usersid, $users_name) = ($count > 0) ? [$recentkyRegisteredUsers[0]["user_id"], $recentkyRegisteredUsers[0]["user_name"]] : [null, null];
-        $data = [ 'status' => 200, 'data' => md5(json_encode(array($usersid, $users_name))) ,'msg' => "Registered successful.",'error' => 0 ];
-        http_response_code(200);
-    }else{
-        $data = [ 'status' => 303, 'data' => json_encode(array($email,$password)) ,'msg' => "Username Is Exist Try Anotherone",'error' => 0 ];
-        http_response_code(303);
+    $registeredUsersEmail =  $database->getUsersField("user_email");
+    $usersEmailAddress = [];
+    foreach ($registeredUsersEmail as $key => $value) {
+        $usersEmailAddress[] = $value["user_email"];
     }
+    switch (true) {
+        case in_array($email,$usersEmailAddress):
+            $data = [ 'status' => 303, 'data' => json_encode(array($email,$password)) ,'msg' => "Account already exists on this email!",'error' => 1 ];
+            http_response_code(303);
+            break;
+        case in_array($username,$registeredUsers):
+            $data = [ 'status' => 303, 'data' => json_encode(array($email,$password)) ,'msg' => "Username Is Exist Try another one",'error' => 1 ];
+            http_response_code(303);
+            break;
+        case !in_array($username,$registeredUsers) && !in_array($email,$usersEmailAddress):
+            $array = ["username" => $username, "email" => $email, "password" => $password,NULL];
+            $response = $database->createUser($array);
+            $recentkyRegisteredUsers = $database->findByField("user_name",$username);
+            $users_id ;
+            $users_name ;
+            $count = count($recentkyRegisteredUsers);
+            list($usersid, $users_name) = ($count > 0) ? [$recentkyRegisteredUsers[0]["user_id"], $recentkyRegisteredUsers[0]["user_name"]] : [null, null];
+            $data = [ 'status' => 200, 'data' => json_encode(array("userInfo" => $recentkyRegisteredUsers[0], "token" => $database->encryptToken(json_encode(array($usersid, $users_name))))) ,'msg' => "Registered successful.",'error' => 0 ];
+            http_response_code(200);
+        break;
+                
+        }
     echo json_encode($data);
 }

@@ -16,7 +16,7 @@ $request["fetch_all"] = true;
 if(isset($request["token"]) && isset($request["fetch_all"])){    
     $response = $database->fetchTemplate($request["token"]);
     if(0 < count($response)){
-        $data = [ 'status' => 202, 'data' => json_encode($response) ,'msg' => "Template Fetched Successful.",'error' => 0 ];
+        $data = [ 'status' => 202, 'data' => $response ,'msg' => "Template Fetched Successful.",'error' => 0 ];
         http_response_code(202);
     }else{
         $data = [ 'status' => 404, 'data' => json_encode($request["token"]) ,'msg' => "Error Occurce In Fetch Template. Please try again.",'error' => 0 ];

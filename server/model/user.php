@@ -8,15 +8,15 @@ class User
         $this->connection = $this->database->getConnection();
     }
 
-    public function getUsersField($fields)
+    public function getUsersField($field)
     {
-        $fieldList = implode(",", $fields);
-        $sql = "SELECT $fieldList FROM " . Database::USER_TABLE;
+        // $fieldList = implode(",", $fields);
+        $sql = "SELECT $field FROM " . Database::USER_TABLE;
         return $this->select($sql);
     }
 
-    public function getUsersName()
-    {
+    public function getUsersName(){
+        
         $sql = "SELECT " . Database::USER_NAME . " FROM " . Database::USER_TABLE;
         return $this->select($sql, Database::USER_NAME);
     }
@@ -78,6 +78,11 @@ class User
     {
         $token = openssl_encrypt($data,"AES-128-ECB","(!@#)(#@!)");
         return $token;
+    }
+    public function verifyToken($token){
+        $decryptedData = $this->decryptToken($token);
+        print_r($decryptedData);
+        
     }
     public function decryptToken($token)
     {
