@@ -1,0 +1,14 @@
+.draggable-element {
+    user-select: none;
+    display: none;
+}
+
+.dragging {
+    pointer-events: auto;
+}
+
+@media (max-width: 320px) {
+    #element-container {
+        width: 10px;
+    }
+}
