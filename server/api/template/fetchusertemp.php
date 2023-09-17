@@ -10,18 +10,14 @@ header('Content-type: application/json');
 
 $request = json_decode(file_get_contents('php://input'), true);
 
-// $request["token"]= "";
-// $request["template_id"] = 25;
-
-if(isset($request["token"]) && isset($request["template_id"])){
-        
-    $response = $database->fetchTemplate($request["token"],$request["template_id"]);
+if(isset($request["token"])){    
+    $response = $database->fetchUserTemplate($request["token"]);
     if(0 < count($response)){
-        $data = [ 'status' => 202, 'data' => json_encode($response) ,'msg' => "Template Fetched Successful.",'error' => 0 ];
+        $data = [ 'status' => 202, 'data' => array($request["token"],$response) ,'msg' => "User Template Fetched Successful.",'error' => 0 ];
         http_response_code(202);
     }else{
         $data = [ 'status' => 404, 'data' => json_encode($request["token"]) ,'msg' => "Error Occurce In Fetch Template. Please try again.",'error' => 0 ];
         http_response_code(404);
     }
-    return json_encode($data);
+    echo json_encode($data);
 }

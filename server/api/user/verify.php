@@ -10,13 +10,14 @@ header('Content-type: application/json');
 
 $request = json_decode(file_get_contents('php://input'), true);
 
+
 if(isset($request["token"])){
-    $registeredUsers = $user->verifyToken($request["token"]);
-    if(count($registeredUsers) > 0){     
-        $data = [ 'status' => 202, 'data' => $user->encryptToken(json_encode(array($email,$password))) ,'token' => $token, 'msg' => "Login successful.",'error' => 0 ];
+    $userInfo = $user->verifyToken($request["token"]);
+    if($userInfo){     
+        $data = [ 'status' => 202, 'data' => $user->encryptToken(json_encode(array($userInfo,$request["token"]))) , 'msg' => "user account is exist.",'error' => 0 ];
         http_response_code(202);
     }else{
-        $data = [ 'status' => 404, 'data' => json_encode(array($email,$password)) ,'msg' => "Login failed: Incorrect email or password. Please try again.",'error' => 0 ];
+        $data = [ 'status' => 404, 'data' => json_encode(array($request["token"])) ,'msg' => "user account is not exist.",'error' => 1 ];
         http_response_code(404);
     }
     echo json_encode($data);

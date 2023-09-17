@@ -36,7 +36,8 @@ if(isset($request) && !empty($request)){
             $users_name ;
             $count = count($recentkyRegisteredUsers);
             list($usersid, $users_name) = ($count > 0) ? [$recentkyRegisteredUsers[0]["user_id"], $recentkyRegisteredUsers[0]["user_name"]] : [null, null];
-            $data = [ 'status' => 200, 'data' => json_encode(array("userInfo" => $recentkyRegisteredUsers[0], "token" => $database->encryptToken(json_encode(array($usersid, $users_name))))) ,'msg' => "Registered successful.",'error' => 0 ];
+            $token = $database->encryptToken(json_encode(array($usersid, $users_name)));
+            $data = [ 'status' => 200, 'data' => json_encode(array("userInfo" => $recentkyRegisteredUsers[0],"token" => $token ))  ,'msg' => "Registered successful.",'error' => 0 ];
             http_response_code(200);
         break;
                 

@@ -31,7 +31,30 @@ class Database
     {
         return $this->connection;
     }
-    private function executeStatement($query)
+    public function executeStatement($query)
+    {
+        $result = $this->connection->query($query);
+
+        if ($result === false) {
+            die("Query failed: " . $this->connection->error);
+        }
+        return $result;
+    }
+    public function onlyExe($query)
+    {
+        return  $this->connection->query($query);
+    }
+    public function encryptToken($data)
+    {
+        $token = openssl_encrypt($data,"AES-128-ECB","(!@#)(#@!)");
+        return $token;
+    }
+    public function decryptToken($token)
+    {
+        $decrypted_token = openssl_decrypt($token,"AES-128-ECB","(!@#)(#@!)");
+        return json_decode($decrypted_token);
+    }
+    public function select($query, $field = null)
     {
         $result = $this->connection->query($query);
 
@@ -39,7 +62,19 @@ class Database
             die("Query failed: " . $this->connection->error);
         }
 
-        return $result;
+        $rows = [];
+
+        while ($row = $result->fetch_assoc()) {
+            $rows[] = $row;
+        }
+
+        $result->free();
+
+        if ($field !== null) {
+            return array_column($rows, $field);
+        } else {
+            return $rows;
+        }
     }
 }
 ?>

@@ -2,6 +2,8 @@
 require_once('database.php'); 
 class User
 {
+    private $database;
+    private $connection;
     public function __construct()
     { 
         $this->database = new Database();
@@ -10,7 +12,6 @@ class User
 
     public function getUsersField($field)
     {
-        // $fieldList = implode(",", $fields);
         $sql = "SELECT $field FROM " . Database::USER_TABLE;
         return $this->select($sql);
     }
@@ -27,10 +28,20 @@ class User
         $sql = "SELECT * FROM " . Database::USER_TABLE . " WHERE " . Database::USER_EMAIL . " = '$email' AND " . Database::USER_PASSWORD . " = '$passwordHash'";
         return $this->select($sql);
     }
-    public function findByField($field, $value)
+    public function adminUserLogin($email, $password)
+    {
+        $passwordHash = md5($password);
+        $sql = "SELECT * FROM admin WHERE email = '$email' AND password = '$passwordHash'";
+        return $this->select($sql);
+    }
+
+    public function findByField($field, $value,$onlyExe = 0)
     {
         $escapedValue = $this->connection->real_escape_string($value);
         $sql = "SELECT * FROM " . Database::USER_TABLE . " WHERE $field = '$escapedValue'";
+        if($onlyExe){
+            return $this->connection->query($sql);
+        }
         return $this->select($sql);
     }
 
@@ -74,20 +85,16 @@ class User
             return $rows;
         }
     }
-    public function encryptToken($data)
-    {
-        $token = openssl_encrypt($data,"AES-128-ECB","(!@#)(#@!)");
-        return $token;
-    }
     public function verifyToken($token){
-        $decryptedData = $this->decryptToken($token);
-        print_r($decryptedData);
-        
-    }
-    public function decryptToken($token)
-    {
-        $decrypted_token = openssl_decrypt($token,"AES-128-ECB","(!@#)(#@!)");
-        return $decrypted_token;
+        $decryptedData = $this->database->decryptToken($token);
+        $user_id = $decryptedData[0];
+        $user = $this->findByField("user_id",$user_id,1);
+        if($user->mysqli_num_rows()){
+            $response = $user->fetch_assoc();
+        }else{
+            $response = 0;
+        }
+        return $user;
     }
     private function executeStatement($query)
     {

@@ -20,7 +20,8 @@ async function submitLoginForm(e) {
         console.log(responseData)
         if (responseData.status == 202) {
             const userData = responseData.data;
-            cookie.setCookie("userInfo",responseData.token,2);
+            console.log(responseData.data.token)
+            cookie.setCookie("token",responseData.data.token,2);
             window.location.href = "dashboard.html";
             return true;
         }
