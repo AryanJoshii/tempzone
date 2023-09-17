@@ -16,16 +16,19 @@
 </head>
 
 <body>
-    <aside id="element-container" class="flex flex-col fixed overflow-auto w-[300px] p-3 outline outline-2 outline-black">
-        <div class="flex-1">
-            <div id="element-menu" class="grid gap-2 grid-cols-2">
+    <div id="container">
+        <aside id="element-container"
+            class="flex flex-col fixed overflow-auto w-[300px] p-3 outline outline-2 outline-black">
+            <div class="flex-1">
+                <div id="element-menu" class="grid gap-2 grid-cols-2">
+                </div>
             </div>
+            <button class="outline outline-2 text-3xl mb-7">PRINT</button>
+        </aside>
+        <div class="relative flex justify-center items-center w-[calc(100%-300px)] left-[300px] h-[calc(100vh-48px)]">
+            <div id="drop-container" class="relative overflow-hidden w-[500px] h-[500px] border-[1px] border-black"
+                ondragover="allowDrop(event)" ondrop="drop(event)"></div>
         </div>
-        <button class="outline outline-2 text-3xl mb-7">PRINT</button>
-    </aside>
-    <div class="relative flex justify-center items-center w-[calc(100%-300px)] left-[300px] h-[calc(100vh-48px)]">
-        <div id="drop-container" class="relative overflow-hidden w-[500px] h-[500px] border-[1px] border-black"
-            ondragover="allowDrop(event)" ondrop="drop(event)"></div>
     </div>
 </body>
 
