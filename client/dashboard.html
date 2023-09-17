@@ -1,32 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Dashboard - TempZone</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="assets/scripts/components/navbar.js" defer></script>
+    <link rel="stylesheet" href="assets/styles/global.css">
+    <script type="module" src="assets/scripts/components/navbar.js" defer></script>
     <script src="assets/scripts/components/sidebar.js" defer></script>
+    <script src="assets/scripts/components/template-dialog.js"></script>
 </head>
+
 <body>
-    <!-- <header id="navbar" class="flex bg-white justify-between items-center top-0 sticky px-3 py-3 z-[99999] border-b-2 border-black">
-        <h1 class="text-2xl font-semibold">TempZone</h1>
-        <div class="flex items-center gap-5">
-            <button class="toggleDarkMode">
-                Light
-            </button>
-            <div class="rounded-full w-8 h-8 bg-black">
+    <div id="container">
+        <div id="pages">
+            <div class="grid grid-cols-2 gap-4">
+                <div class="outline outline-1 rounded-[10px] p-2">
+                    <h1 class="text-2xl font-medium">Templates Created</h1>
+                    <h3 class="text-xl">100</h3>
+                </div>
+                <div class="outline outline-1 rounded-[10px] p-2">
+                    <h1 class="text-2xl font-medium">Templates Created</h1>
+                    <h3 class="text-xl">100</h3>
+                </div>
+            </div>
+            <h1 class="text-2xl font-semibold border-b-[1px] border-black my-4">Your Templates</h1>
+            <div class="grid grid-cols-2 gap-4 mb-4">
+                <div class="outline outline-1 rounded-[10px] p-2">
+                    <h1 class="text-2xl font-medium">Templates Created</h1>
+                    <h3 class="text-xl">100</h3>
+                </div>
+                <div class="outline outline-1 rounded-[10px] p-2">
+                    <h1 class="dialog-header">HELLO</h1>
+                    <h1 class="text-2xl font-medium">Templates Created</h1>
+                    <h3 class="text-xl">100</h3>
+                </div>
             </div>
         </div>
-    </header> -->
-    <!-- <aside id="sidebar" class="fixed h-[calc(100vh-48px)] bg-gray-600 w-[250px]">
-        hello
-    </aside> -->
-    <div id="pages" class="relative">
-        <div>Lorem ipsum dolor sit amet.</div>
-        <div>Nobis necessitatibus itaque dicta ipsum!</div>
-        <div>Iure harum error dicta numquam?</div>
-        <div>Tenetur eum consectetur eaque expedita!</div>
     </div>
 </body>
+
 </html>

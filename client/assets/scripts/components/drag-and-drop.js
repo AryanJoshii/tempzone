@@ -1,13 +1,13 @@
-
 function drag(e) {
     e.dataTransfer.clearData();
-    e.dataTransfer.setData("id", e.target.children[0].id)
+    e.dataTransfer.setData("id", e.target.children[0].id);
 }
 
 function drop(e) {
     const dropContainer = document.getElementById("drop-container");
     const draggedElement = document.getElementById(e.dataTransfer.getData("id")).cloneNode(true);
-    draggedElement.classList.remove("hidden");
+    // draggedElement.classList.remove("hidden");
+    draggedElement.style.display = "block";
 
     const x = e.clientX - dropContainer.getBoundingClientRect().left;
     const y = e.clientY - dropContainer.getBoundingClientRect().top;
@@ -25,10 +25,30 @@ function drop(e) {
 
 function allowDrop(e) {
     e.preventDefault();
-    if (e.target.getAttribute("draggable") == "true")
+    if (e.target.getAttribute("draggable") === "true")
         e.dataTransfer.dropEffect = "none";
     else
         e.dataTransfer.dropEffect = "all";
+}
+
+function addElementOnTouch(element) {
+    const dropContainer = document.getElementById("drop-container");
+    const elementToAppend = element.children[0].cloneNode(true);
+    
+    const containerRect = dropContainer.getBoundingClientRect();
+    const elementRect = elementToAppend.getBoundingClientRect();
+
+    // Calculate the center coordinates
+    const centerX = containerRect.width / 2 - elementRect.width / 2;
+    const centerY = containerRect.height / 2 - elementRect.height / 2;
+
+    // Set the element's position to the center
+    elementToAppend.style.position = "absolute";
+    elementToAppend.style.display = "block";
+    elementToAppend.style.left = `${centerX}px`;
+    elementToAppend.style.top = `${centerY}px`;
+
+    dropContainer.appendChild(elementToAppend);
 }
 
 // dragElements.forEach((element) => {

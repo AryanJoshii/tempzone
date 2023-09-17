@@ -2,8 +2,51 @@
 @tailwind components;
 @tailwind utilities;
 
+@import "components/dialog.css";
+
+:root {
+    --navbar-height: 52px;
+    --sidebar-width: 200px;
+    --dashboard-spacing: 20px;
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+#container {
+    margin: 0 10px;
+}
+
+#navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    top: 20px;
+    position: sticky;
+    z-index: 50;
+    outline: 1px solid black;
+    margin: var(--dashboard-spacing) 0 var(--dashboard-spacing) 0;
+    background-color: white;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+#sidebar {
+    width: var(--sidebar-width);
+    margin: 0 var(--dashboard-spacing) var(--dashboard-spacing) 0;
+    position: fixed;
+    height: calc(100vh - var(--navbar-height) - var(--dashboard-spacing) * 3);
+    outline: 1px solid black;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+#pages {
+    position: relative;
+    left: calc(var(--sidebar-width) + var(--dashboard-spacing));
+    width: calc(100% - var(--sidebar-width) - var(--dashboard-spacing));
+    /* height: calc(100vh - var(--navbar-height) - var(--dashboard-spacing) * 2); */
 }

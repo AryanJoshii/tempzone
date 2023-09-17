@@ -6,19 +6,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editor - TempZone</title>
     <link rel="stylesheet" href="./assets/styles/global.css">
+    <link rel="stylesheet" href="./assets/styles/editor-page.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <script type="module" src="assets/scripts/components/navbar.js" defer></script>
     <script src="assets/scripts/components/dragbar.js" defer></script>
     <script src="assets/scripts/components/drag-and-drop.js" defer></script>
     <script src="assets/scripts/components/move-element.js" defer></script>
+    <script src="assets/scripts/components/edit-element.js" defer></script>
 </head>
 
 <body>
-    <aside id="element-container" class="fixed overflow-auto w-[300px] p-3 outline outline-2 outline-black">
-        <div id="element-menu" class="grid gap-2 grid-cols-2">
-            <!-- <div id="touch" style="cursor: grab; user-select: none;" ondragstart="drag(event)" draggable="true">HEllow
-            </div> -->
+    <aside id="element-container" class="flex flex-col fixed overflow-auto w-[300px] p-3 outline outline-2 outline-black">
+        <div class="flex-1">
+            <div id="element-menu" class="grid gap-2 grid-cols-2">
+            </div>
         </div>
+        <button class="outline outline-2 text-3xl mb-7">PRINT</button>
     </aside>
     <div class="relative flex justify-center items-center w-[calc(100%-300px)] left-[300px] h-[calc(100vh-48px)]">
         <div id="drop-container" class="relative overflow-hidden w-[500px] h-[500px] border-[1px] border-black"

@@ -1,13 +1,16 @@
-$(function () {
-    //navbar
+function appendSidebar() {
+    const navbar = document.getElementById("navbar");
     let sidebar = document.createElement('aside');
     sidebar.id = "sidebar"
-    sidebar.className = "fixed h-[calc(100vh-48px)] border-r-2 border-black w-[250px]"
-    sidebar.innerText = "fixed h-[calc(100vh-48px)] w-[250px]"
+    sidebar.innerText = "hello this is sidebat"
 
-    $(sidebar).insertAfter("#navbar");
+    if (document.body.contains(navbar)) {
+        navbar.after(sidebar);
+    } else {
+        document.getElementById("container").insertAdjacentElement("afterbegin", sidebar);
+    }
+}
 
-    $(window).on('load', () => {
-        $("#pages").addClass(`w-[calc(100%-${$("#sidebar").outerWidth()}px)] left-[${$("#sidebar").outerWidth()}px]`);
-    })
+window.addEventListener("load", () => {
+    appendSidebar();
 })
