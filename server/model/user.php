@@ -34,7 +34,11 @@ class User
         $sql = "SELECT * FROM admin WHERE email = '$email' AND password = '$passwordHash'";
         return $this->select($sql);
     }
-
+    public function encryptToken($data)
+    {
+        $token = openssl_encrypt($data,"AES-128-ECB","(!@#)(#@!)");
+        return $token;
+    }
     public function findByField($field, $value,$onlyExe = 0)
     {
         $escapedValue = $this->connection->real_escape_string($value);

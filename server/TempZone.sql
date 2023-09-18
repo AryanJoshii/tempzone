@@ -13,11 +13,11 @@ USE `TempZone`;
 DROP TABLE IF EXISTS `admin`;
 CREATE TABLE `admin` (
   `admin_id` int NOT NULL AUTO_INCREMENT,
-  `username` varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `username` varchar(256)  NOT NULL,
   `email` varchar(256) NOT NULL,
-  `password` varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `password` varchar(256)  NOT NULL,
   PRIMARY KEY (`admin_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 
 
 DROP TABLE IF EXISTS `category`;
@@ -25,27 +25,27 @@ CREATE TABLE `category` (
   `category_id` int NOT NULL AUTO_INCREMENT,
   `category_name` varchar(256) NOT NULL,
   PRIMARY KEY (`category_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 
 
 DROP TABLE IF EXISTS `registered_users`;
 CREATE TABLE `registered_users` (
   `user_id` int NOT NULL AUTO_INCREMENT,
-  `user_name` varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `user_email` varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `password` varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `template_created` varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `user_name` varchar(256)  NOT NULL,
+  `user_email` varchar(256)  NOT NULL,
+  `password` varchar(256)  NOT NULL,
+  `template_created` varchar(256)  DEFAULT NULL,
   `registered_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ;
 
 
 DROP TABLE IF EXISTS `user_templates`;
 CREATE TABLE `user_templates` (
   `template_id` int NOT NULL AUTO_INCREMENT,
-  `template_name` varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `template_tags` varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `template_name` varchar(256)  DEFAULT NULL,
+  `template_tags` varchar(256) DEFAULT NULL,
   `template_category` int DEFAULT NULL,
   `template_owner` int NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -55,7 +55,7 @@ CREATE TABLE `user_templates` (
   KEY `template_owner` (`template_owner`),
   CONSTRAINT `user_templates_ibfk_4` FOREIGN KEY (`template_category`) REFERENCES `category` (`category_id`),
   CONSTRAINT `user_templates_ibfk_5` FOREIGN KEY (`template_owner`) REFERENCES `registered_users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ;
 
 
 -- 2023-09-17 23:54:21
