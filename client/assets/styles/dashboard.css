@@ -1,0 +1,23 @@
+#user-template-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+}
+
+#user-template-grid a {
+    display: flex;
+    flex-direction: column;
+    outline: 1px solid black;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+#user-template-grid a h5 {
+    font-size: 24px;
+    font-weight: bolder;
+}
+
+#user-template-grid a h6 {
+    font-size: 18.72px;
+    font-weight: lighter;
+}

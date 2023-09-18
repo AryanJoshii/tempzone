@@ -7,27 +7,32 @@
     <title>Editor - TempZone</title>
     <link rel="stylesheet" href="./assets/styles/global.css">
     <link rel="stylesheet" href="./assets/styles/editor-page.css">
+    <script src="assets/scripts/auth/checkToken.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script type="module" src="assets/scripts/components/navbar.js" defer></script>
+    <script src="assets/scripts/components/navbar.js" defer></script>
     <script src="assets/scripts/components/dragbar.js" defer></script>
     <script src="assets/scripts/components/drag-and-drop.js" defer></script>
     <script src="assets/scripts/components/move-element.js" defer></script>
     <script src="assets/scripts/components/edit-element.js" defer></script>
+    <script type="module" src="assets/scripts/components/template.js" defer></script>
 </head>
 
 <body>
     <div id="container">
-        <aside id="element-container"
-            class="flex flex-col fixed overflow-auto w-[300px] p-3 outline outline-2 outline-black">
+        <aside id="element-container">
             <div class="flex-1">
                 <div id="element-menu" class="grid gap-2 grid-cols-2">
                 </div>
             </div>
-            <button class="outline outline-2 text-3xl mb-7">PRINT</button>
+            <div class="grid grid-cols-2 gap-2">
+                <label class="col-span-2" for="template-name">Template Name</label>
+                <input name="template-name" class="outline outline-1 rounded-md p-1 col-span-2" id="template-name" type="text" />
+                <button class="flex-1 rounded-md p-1 bg-blue-400" onclick="window.print()">Print</button>
+                <button id="template-save-btn" class="flex-1 rounded-md p-1 bg-green-400">Save</button>
+            </div>
         </aside>
-        <div class="relative flex justify-center items-center w-[calc(100%-300px)] left-[300px] h-[calc(100vh-48px)]">
-            <div id="drop-container" class="relative overflow-hidden w-[500px] h-[500px] border-[1px] border-black"
-                ondragover="allowDrop(event)" ondrop="drop(event)"></div>
+        <div id="template-container">
+            <div id="drop-container" ondragover="allowDrop(event)" ondrop="drop(event)"></div>
         </div>
     </div>
 </body>

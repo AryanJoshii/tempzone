@@ -1,0 +1,23 @@
+#explore-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+}
+
+#explore-grid div {
+    display: flex;
+    flex-direction: column;
+    outline: 1px solid black;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+#explore-grid div h5 {
+    font-size: 24px;
+    font-weight: bolder;
+}
+
+#explore-grid div h6 {
+    font-size: 18.72px;
+    font-weight: lighter;
+}

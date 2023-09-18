@@ -24,7 +24,8 @@ class Template
     public function updateTemplate($token,$template_data){
         $decryptedData = $this->database->decryptToken($token);
         $user_id = $decryptedData[0];
-        $sql = "UPDATE ".Database::TEMPLATE_TABLE." SET `template_name` = '".$template_data["template_name"]."', `template_tags` = '".json_encode($template_data["template_tags"])."', `template_category` = '".$template_data["template_category"]."',  `template_owner` = ".$user_id." WHERE `template_id` = ".$template_data["template_id"];
+        //  $sql = "UPDATE ".Database::TEMPLATE_TABLE." SET `template_name` = '".$template_data["template_name"]."', `template_tags` = '".json_encode($template_data["template_tags"])."', `template_category` = '".$template_data["template_category"]."',  `template_owner` = ".$user_id." WHERE `template_id` = ".$template_data["template_id"];
+        $sql = "UPDATE ".Database::TEMPLATE_TABLE." SET `template_name` = '".$template_data["template_name"]."', `template_tags` = '".$template_data["template_tags"]."' WHERE `template_id` = ".$template_data["template_id"];
         $result = $this->connection->query($sql);
         $template = $this->findByField("template_id",$template_data["template_id"]);
         return $template;
@@ -72,7 +73,7 @@ class Template
         }
         return false;
     }
-    public function fetchTemplate($token){
+    public function fetchTemplate($token, $template_id){
         $decryptedData = $this->database->decryptToken($token);
         $user_id = $decryptedData[0];
         $sql ="SELECT * FROM ".Database::TEMPLATE_TABLE." WHERE `template_id` =".$template_id;
@@ -86,7 +87,12 @@ class Template
     public function fetchUserTemplate($token){
         $decryptedData = $this->database->decryptToken($token);
         $user_id = $decryptedData[0];
-        $sql ="SELECT * FROM ".Database::TEMPLATE_TABLE." WHERE `template_owner` =".$user_id;
+        // $sql ="SELECT * FROM ".Database::TEMPLATE_TABLE." WHERE `template_owner` =".$user_id;
+        $sql = "SELECT ".Database::TEMPLATE_TABLE.".*, ".Database::CATEGORY_TABLE.".category_name AS template_category, ".Database::USER_TABLE.".user_name AS template_owner 
+                FROM ".Database::TEMPLATE_TABLE."
+                LEFT JOIN ".Database::CATEGORY_TABLE." ON " .Database::TEMPLATE_TABLE.".template_category = ".Database::CATEGORY_TABLE.".category_id 
+                LEFT JOIN ".Database::USER_TABLE." ON " .Database::TEMPLATE_TABLE.".template_owner = ".Database::USER_TABLE.".user_id 
+                WHERE `template_owner` =".$user_id;
         $result = $this->connection->query($sql);
         $records = [];
         while ($row = $result->fetch_assoc()) {
@@ -97,7 +103,12 @@ class Template
     public function fetchAllTemplate($token){
         $decryptedData = $this->database->decryptToken($token);
         $user_id = $decryptedData[0];
-        $sql ="SELECT * FROM ".Database::TEMPLATE_TABLE." WHERE `template_owner` <>".$user_id;
+        // $sql ="SELECT * FROM ".Database::TEMPLATE_TABLE." WHERE `template_owner` <>".$user_id;
+        $sql = "SELECT ".Database::TEMPLATE_TABLE.".*, ".Database::CATEGORY_TABLE.".category_name AS template_category, ".Database::USER_TABLE.".user_name AS template_owner 
+                FROM ".Database::TEMPLATE_TABLE."
+                LEFT JOIN ".Database::CATEGORY_TABLE." ON " .Database::TEMPLATE_TABLE.".template_category = ".Database::CATEGORY_TABLE.".category_id 
+                LEFT JOIN ".Database::USER_TABLE." ON " .Database::TEMPLATE_TABLE.".template_owner = ".Database::USER_TABLE.".user_id 
+                WHERE `template_owner` <>".$user_id;
         $result = $this->connection->query($sql);
         $records = [];
         while ($row = $result->fetch_assoc()) {

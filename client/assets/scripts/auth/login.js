@@ -1,4 +1,4 @@
-import { API_URL,cookie } from "../require.js";
+import { API_URL } from "../require.js";
 
 const loginForm = document.getElementById("loginForm");
 loginForm.addEventListener("submit", submitLoginForm)
@@ -17,15 +17,8 @@ async function submitLoginForm(e) {
             body: JSON.stringify(dataObj)
         })
         const responseData = await loginResponse.json();
-        console.log(responseData)
-        if (responseData.status == 202) {
-            const userData = responseData.data;
-            console.log(responseData.data.token)
-            cookie.setCookie("token",responseData.data.token,2);
-            window.location.href = "dashboard.html";
-            return true;
-        }
-        alert(responseData.msg)
+        localStorage.setItem("token", responseData.data.token);
+        window.location.href = "dashboard.html";
     } catch (error) {
         console.log(error);
     }

@@ -13,12 +13,13 @@ class Database
     const USER_PASSWORD = "password";
     const USER_TABLE = "registered_users";
     const TEMPLATE_TABLE = "user_templates";
+    const CATEGORY_TABLE = "category";
 
     public function __construct()
     {
         $host = "localhost";
-        $username = "bhagyesh";
-        $password = "Bhagyesh@123";
+        $username = "root";
+        $password = "";
         $database = "TempZone";
 
         $this->connection = new mysqli($host, $username, $password, $database);

@@ -5,46 +5,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - TempZone</title>
+    <script src="assets/scripts/auth/checkToken.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="assets/styles/global.css">
-    <script type="module" src="assets/scripts/components/navbar.js" defer></script>
+    <link rel="stylesheet" href="assets/styles/dashboard.css">
+    <script src="assets/scripts/components/navbar.js" defer></script>
     <script src="assets/scripts/components/sidebar.js" defer></script>
-    <script src="assets/scripts/components/template-dialog.js"></script>
+    <script src="assets/scripts/components/template-dialog.js" defer></script>
+    <script type="module" src="assets/scripts/template/userTemplateFetch.js" defer></script>
 </head>
 
 <body>
     <div id="container">
         <div id="pages">
-            <div class="grid grid-cols-2 gap-4">
+            <div class="grid grid-cols-3 gap-4">
                 <div class="outline outline-1 rounded-[10px] p-2">
                     <h1 class="text-2xl font-medium">Templates Created</h1>
-                    <h3 class="text-xl">100</h3>
-                </div>
-                <div class="outline outline-1 rounded-[10px] p-2">
-                    <h1 class="text-2xl font-medium">Templates Created</h1>
-                    <h3 class="text-xl">100</h3>
+                    <h3 id="user-temp-count" class="text-xl">0</h3>
                 </div>
             </div>
             <h1 class="text-2xl font-semibold border-b-[1px] border-black my-4">Your Templates</h1>
-            <div class="grid grid-cols-2 gap-4 mb-4">
-                <div class="outline outline-1 rounded-[10px] p-2">
-                    <h1 class="text-2xl font-medium">Templates Created</h1>
-                    <h3 class="text-xl">100</h3>
-                </div>
-                <div class="outline outline-1 rounded-[10px] p-2">
-                    <h1 class="dialog-header">HELLO</h1>
-                    <h1 class="text-2xl font-medium">Templates Created</h1>
-                    <h3 class="text-xl">100</h3>
-                </div>
+            <div id="user-template-grid" class="grid grid-cols-3 gap-4 mb-4">
+
             </div>
+            <label class="inline-block">
+                <div class="outline outline-1 rounded-md flex justify-center items-center">
+                    <img src="assets/icons/camera.svg" width="192" height="192" alt="" srcset="">
+                </div>
+                <input type="file" hidden accept="image/png, image/gif, image/jpeg" name="upload_btn" id="">
+            </label>
         </div>
     </div>
 </body>
-<script>
-import { API_URL,cookie } from "../assets/require.js";
-    window.addEventListener('load', function(){
-        console.log(API_URL)
-    });  
-</script>
 
 </html>

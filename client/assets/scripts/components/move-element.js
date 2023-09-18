@@ -36,7 +36,6 @@ dropContainer.addEventListener(events[deviceType].move, moveElement);
 dropContainer.addEventListener(events[deviceType].up, releaseElement);
 
 function holdElement(e) {
-    console.log(e.target);
     if (dropContainer.contains(e.target) && e.target !== dropContainer) {
         const clientX = !isTouchDevice() ? e.clientX : e.touches[0].clientX;
         const clientY = !isTouchDevice() ? e.clientY : e.touches[0].clientY;
