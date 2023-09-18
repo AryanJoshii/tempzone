@@ -5,6 +5,10 @@ const draggableElement = [
     '<h4 id="heading-4" class="text-3xl font-semibold draggable-element" data-element-name="Heading 4" data-element-type="typography">Test</h4>',
     '<h5 id="heading-5" class="text-2xl font-semibold draggable-element" data-element-name="Heading 5" data-element-type="typography">Test</h5>',
     '<h6 id="heading-6" class="text-xl font-semibold draggable-element" data-element-name="Heading 6" data-element-type="typography">Test</h6>',
+    '<p id="subtitle" class="text-lg draggable-element" data-element-name="Subtitle" data-element-type="typography">Lorem.</p>',
+    '<p id="paragraph" class="draggable-element" data-element-name="Paragraph" data-element-type="typography">Lorem ipsum dolor sit amet.</p>',
+    '<ul id="list-disc" class="list-disc draggable-element" data-element-name="List (Disc)" data-element-type="typography"><li style="pointer-events: none;">hello</li></ul>',
+    '<ul id="list-number" class="list-decimal draggable-element" data-element-name="List (Number)" data-element-type="typography"><li style="pointer-events: none;">hello</li></ul>'
 ]
 
 const elementBar = document.getElementById("element-menu");
@@ -17,10 +21,10 @@ function appendElements() {
         parsedElement.setAttribute("onblur", "blurFunc()");
 
         const elementBox = document.createElement("div");
-        elementBox.className = "border-2 border-black p-2 cursor-grab";
+        elementBox.className = "element-box";
         elementBox.draggable = true;
         elementBox.setAttribute("ondragstart", "drag(event)");
-        elementBox.setAttribute("onmousedown", "addElementOnTouch(this)");
+        elementBox.setAttribute("ontouchstart", "addElementOnTouch(this)");
         elementBox.innerText = parsedElement.dataset.elementName;
         elementBox.append(parsedElement);
         elementBar.insertAdjacentElement("beforeend", elementBox);

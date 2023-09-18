@@ -6,8 +6,6 @@ function drag(e) {
 function drop(e) {
     const dropContainer = document.getElementById("drop-container");
     const draggedElement = document.getElementById(e.dataTransfer.getData("id")).cloneNode(true);
-    // draggedElement.classList.remove("hidden");
-    draggedElement.style.display = "block";
 
     const x = e.clientX - dropContainer.getBoundingClientRect().left;
     const y = e.clientY - dropContainer.getBoundingClientRect().top;
@@ -34,7 +32,7 @@ function allowDrop(e) {
 function addElementOnTouch(element) {
     const dropContainer = document.getElementById("drop-container");
     const elementToAppend = element.children[0].cloneNode(true);
-    
+
     const containerRect = dropContainer.getBoundingClientRect();
     const elementRect = elementToAppend.getBoundingClientRect();
 

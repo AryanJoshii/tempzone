@@ -3,11 +3,13 @@ const templates = [
         name: "resume",
         icon: "assets/icons/resume.svg",
         template_name: "resume",
+        template_category: 1
     },
     {
         template_name: "visiting-card",
         name: "visiting card",
-        icon: "assets/icons/visiting-card.svg"
+        icon: "assets/icons/visiting-card.svg",
+        template_category: 2
     },
 ]
 
@@ -44,6 +46,7 @@ function dialogContent() {
     templates.forEach(template => {
         let box = document.createElement("button");
         box.dataset.templateName = template.template_name;
+        box.dataset.templateCategory = template.template_category;
         box.setAttribute("onclick", "createNewTemplate(this)");
 
         let icon = document.createElement("img");
@@ -68,8 +71,22 @@ function closeTempDialog() {
     document.getElementById("template-dialog").close();
 }
 
-function createNewTemplate(template) {
-    window.location.href = "/client/editor.html?template-name=" + template.dataset.templateName;
+async function createNewTemplate(template) {
+    try {
+        const createTemplate = await fetch(`http://localhost/tempzone/server/api/template/create.php`, {
+            // mode: "no-cors",
+            method: "POST",
+            headers: {
+                'Authorization': localStorage.getItem("token")
+            },
+            body: JSON.stringify({ template_category: template.dataset.templateCategory })
+        });
+        const templateData = await createTemplate.json();
+
+        window.location.href = `/tempzone/client/editor.html?template-category=${template.dataset.templateName}&template-id=${templateData.data.template_id}`;
+    } catch (error) {
+        console.log(error);
+    }
 }
 
 document.addEventListener("click", (e) => {

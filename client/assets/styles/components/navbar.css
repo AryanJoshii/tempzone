@@ -1,0 +1,36 @@
+#navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    top: 20px;
+    position: sticky;
+    z-index: 50;
+    outline: 1px solid black;
+    margin: var(--dashboard-spacing) 0 var(--dashboard-spacing) 0;
+    background-color: white;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+#navbar a {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+#navbar .right-div {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+#navbar .right-div button {
+    outline: 1px solid black;
+    padding: 4px 8px;
+    border-radius: 10px;
+}
+
+#navbar .right-div img {
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+}
