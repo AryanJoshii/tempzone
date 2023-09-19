@@ -28,7 +28,7 @@ function appendTemplates(templates) {
 
         let heading = document.createElement('h5');
         let subHeading = document.createElement('h6');
-        let category = document.createElement('p');
+        let category = document.createElement('p'); 
 
         heading.innerText = template.template_name;
         subHeading.innerText = template.template_owner;

@@ -5,6 +5,7 @@
 @import "components/dialog.css";
 @import "components/navbar.css";
 @import "components/sidebar.css";
+@import "components/table.css";
 
 :root {
     --navbar-height: 52px;

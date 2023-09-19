@@ -9,12 +9,32 @@
     <link rel="stylesheet" href="assets/styles/global.css">
     <script src="assets/scripts/components/navbar.js"></script>
     <script src="assets/scripts/components/sidebar.js"></script>
+    <script type="module" src="assets/scripts/templates.js"></script>
 </head>
 
 <body>
     <div id="container">
         <div id="pages">
-
+            <h1 class="text-2xl font-semibold mb-4">Templates</h1>
+            <table>
+                <thead>
+                    <th>id</th>
+                    <th>Name</th>
+                    <th>Category</th>
+                    <th>creator</th>
+                    <th>created at</th>
+                    <th>updated at</th>
+                    <th>action</th>
+                </thead>
+                <tbody id="template-table">
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th scope="row" colspan="2">Total Templates</th>
+                        <td id="total-data" colspan="5">77</td>
+                    </tr>
+                </tfoot>
+            </table>
         </div>
     </div>
 </body>

@@ -3,7 +3,6 @@ const authPages = ["/tempzone/client/login.html", "/tempzone/client/register.htm
 
 function checkToken() {
     let path = window.location.pathname;
-    console.log(path);
     let token = localStorage.getItem("token");
 
     if (!token && pages.includes(path)) {
@@ -15,4 +14,6 @@ function checkToken() {
     }
 }
 
-checkToken();
+
+window.addEventListener("load", checkToken);
+window.addEventListener("unload", checkToken);

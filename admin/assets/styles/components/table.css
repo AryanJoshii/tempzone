@@ -1,0 +1,42 @@
+table {
+    width: 100%;
+}
+
+table thead th {
+    padding: 10px;
+    background-color: rgba(128, 128, 128, 0.4);
+    text-transform: capitalize;
+}
+
+table tbody td {
+    padding: 10px;
+    background-color: rgba(128, 128, 128, 0.1);
+    /* text-transform: capitalize; */
+    text-align: center;
+}
+
+table tbody tr td:last-child {
+    /* display: flex; */
+    padding: 10px;
+    background-color: rgba(128, 128, 128, 0.1);
+    /* justify-content: center; */
+}
+
+table tbody tr td:last-child img {
+    margin: 0 auto;
+    width: 20px;
+    cursor: pointer;
+}
+
+
+table tfoot {
+    padding: 10px;
+    background-color: rgba(128, 128, 128, 0.4);
+    text-transform: capitalize;
+}
+
+table tfoot th {
+    padding: 10px;
+    text-transform: capitalize;
+    text-align: center;
+}
