@@ -15,13 +15,37 @@ class User
         $sql = "SELECT $field FROM " . Database::USER_TABLE;
         return $this->select($sql);
     }
-
+    public function fetchUser($token,$user_id)
+    {
+        $decryptedData = $this->database->decryptToken($token);
+        $admin_id = $decryptedData[0];
+        $sql = "SELECT * FROM " . Database::USER_TABLE. " WHERE user_id=".$user_id;
+        return $this->select($sql);
+    }
+    public function fetchAllUser($token)
+    {
+        $decryptedData = $this->database->decryptToken($token);
+        $admin_id = $decryptedData[0];
+        $sql = "SELECT * FROM " . Database::USER_TABLE;
+        return $this->select($sql);
+    }
+    public function deleteUser($token,$user_id)
+    {
+        $decryptedData = $this->database->decryptToken($token);
+        $admin_id = $decryptedData[0];
+        $user = $this->fetchUser($token,$user_id);
+        $sql = "DELETE FROM  " . Database::USER_TABLE. " WHERE user_id=".$user_id;
+        if($this->database->onlyExe($sql)){
+            return $user;
+        }
+        return false;
+    }
+    
     public function getUsersName(){
         
         $sql = "SELECT " . Database::USER_NAME . " FROM " . Database::USER_TABLE;
         return $this->select($sql, Database::USER_NAME);
     }
-
     public function userLogin($email, $password)
     {
         $passwordHash = md5($password);

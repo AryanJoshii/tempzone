@@ -18,8 +18,8 @@ class Database
     public function __construct()
     {
         $host = "localhost";
-        $username = "root";
-        $password = "";
+        $username = "bhagyesh";
+        $password = "Bhagyesh@123";
         $database = "TempZone";
 
         $this->connection = new mysqli($host, $username, $password, $database);
