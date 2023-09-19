@@ -16,28 +16,27 @@ $headers = getallheaders();
 
 if(array_key_exists("Authorization", $headers) && isset($request["template_id"])){
     $response = $database->fetchTemplate($headers["Authorization"],$request["template_id"]);
-    $resData = array(
-        "template_id" => $response[0]["template_id"],
-        "template_name" => $response[0]["template_name"],
-        "template_tags" => json_encode($response[0]["template_tags"], JSON_UNESCAPED_SLASHES),
-        "template_category" => $response[0]["template_category"],
-        "template_owner" => $response[0]["template_owner"],
-        "created_at" => $response[0]["created_at"],
-        "updated_at" => $response[0]["updated_at"]
-    );
-    print_r($resData);
+    // $resData = array(
+    //     "template_id" => $response[0]["template_id"], 
+    //     "template_name" => $response[0]["template_name"], 
+    //     "template_tags" => json_decode($response[0]["template_tags"], true), 
+    //     "template_category" => $response[0]["template_category"], 
+    //     "template_owner" => $response[0]["template_owner"], 
+    //     "created_at" => $response[0]["created_at"], 
+    //     "updated_at" => $response[0]["updated_at"] 
+    // );
+    // print_r(json_decode($response[0]["template_tags"], true)->fetch_assoc());
     if(0 < count($response)){
-        $data = [ 'status' => 202, 'data' => $resData ,'msg' => "Template Fetched Successful.",'error' => 0 ];
-        print_r($data);
+        $data = [ 'status' => 202, 'data' => $response[0],'msg' => "Template Fetched Successful.", 'error' => 0 ];
         http_response_code(202);
     }else{
-        $data = [ 'status' => 404, 'data' => json_decode("{}") ,'msg' => "Error Occurce In Fetch Template. Please try again.",'error' => 0 ];
-        print_r($data);
+        $data = [ 'status' => 404, 'data' => json_decode("{}"), 'msg' => "Error Occurce In Fetch Template. Please try again.",'error' => 0 ];
         http_response_code(404);
     }
-    return json_encode($data);
+    echo json_encode($data);
 } else {
     $data = [ 'status' => 401, 'data' => json_decode("{}"),'msg' => "Unauthorized",'error' => "Unauthorized" ];
     http_response_code(401);
     echo json_encode($data);
 }
+?>

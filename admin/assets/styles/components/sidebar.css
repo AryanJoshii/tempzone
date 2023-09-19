@@ -1,0 +1,30 @@
+#sidebar {
+    width: var(--sidebar-width);
+    margin: 0 var(--dashboard-spacing) var(--dashboard-spacing) 0;
+    position: fixed;
+    height: calc(100vh - var(--navbar-height) - var(--dashboard-spacing) * 3);
+    outline: 1px solid black;
+    border-radius: 10px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#sidebar .nav-link {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    outline: 1px solid black;
+    border-radius: 10px;
+    padding: 5px 10px;
+}
+
+#sidebar .nav-link img {
+    width: 20px;
+    height: 20px;
+}
+
+#sidebar .nav-link span {
+    font-size: 20px;
+}

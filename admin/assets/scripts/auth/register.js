@@ -18,8 +18,12 @@ async function submitLoginForm(e) {
             body: JSON.stringify(dataObj)
         });
         const responseData = await loginResponse.json();
-        localStorage.setItem("token", responseData.data.token);
-        window.location.href = "dashboard.html";
+        if (responseData.status == 200) {
+            const userData = responseData.data;
+            window.location.href = "login.html"
+        }
+        alert(responseData.msg)
+
     } catch (error) {
         console.log(error);
     }

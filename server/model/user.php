@@ -100,6 +100,12 @@ class User
         }
         return $user;
     }
+    public function countTableRows() {
+        $sql = "SELECT COUNT(*) AS row_count FROM ".Database::USER_TABLE;
+        $result = $this->connection->query($sql);
+        $data = $result->fetch_assoc()["row_count"];
+        return $data;
+    }
     private function executeStatement($query)
     {
         $result = $this->connection->query($query);
