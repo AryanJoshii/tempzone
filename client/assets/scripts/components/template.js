@@ -48,7 +48,7 @@ async function fetchTemplate() {
             body: JSON.stringify({ template_id: url.searchParams.get("template-id") })
         });
         const templateFetchData = await templateFetchResponse.json();
-        console.log(templateFetchData);
+        console.log(templateFetchData.data.template_tags);
     } catch (error) {
         console.log(error);
     }

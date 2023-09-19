@@ -19,6 +19,8 @@ CREATE TABLE `admin` (
   PRIMARY KEY (`admin_id`)
 );
 
+INSERT INTO `admin` VALUES (NULL, 'admin', 'admin@gmail.com', 'strongpassword');
+
 
 DROP TABLE IF EXISTS `category`;
 CREATE TABLE `category` (
@@ -26,6 +28,8 @@ CREATE TABLE `category` (
   `category_name` varchar(256) NOT NULL,
   PRIMARY KEY (`category_id`)
 );
+
+INSERT INTO `category` VALUES (NULL, 'resume'), (NULL, 'visiting-card');
 
 
 DROP TABLE IF EXISTS `registered_users`;
@@ -45,7 +49,7 @@ DROP TABLE IF EXISTS `user_templates`;
 CREATE TABLE `user_templates` (
   `template_id` int NOT NULL AUTO_INCREMENT,
   `template_name` varchar(256)  DEFAULT NULL,
-  `template_tags` varchar(256) DEFAULT NULL,
+  `template_tags` TEXT DEFAULT NULL,
   `template_category` int DEFAULT NULL,
   `template_owner` int NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,

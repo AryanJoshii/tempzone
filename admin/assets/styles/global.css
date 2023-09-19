@@ -1,0 +1,31 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import "components/dialog.css";
+@import "components/navbar.css";
+@import "components/sidebar.css";
+
+:root {
+    --navbar-height: 52px;
+    --sidebar-width: 200px;
+    --dashboard-spacing: 20px;
+    --elementbar-width: 300px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#container {
+    margin: 0 10px;
+}
+
+#pages {
+    position: relative;
+    left: calc(var(--sidebar-width) + var(--dashboard-spacing));
+    width: calc(100% - var(--sidebar-width) - var(--dashboard-spacing));
+    /* height: calc(100vh - var(--navbar-height) - var(--dashboard-spacing) * 2); */
+}

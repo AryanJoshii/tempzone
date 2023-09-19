@@ -15,7 +15,7 @@ class Template
         $decryptedData = $this->database->decryptToken($token);
         $user_id = $decryptedData[0];
         $user_name = $decryptedData[1];
-        $sql = "INSERT INTO " . Database::TEMPLATE_TABLE . " VALUES (NULL, NULL,NULL,".$category.", ".$user_id.", NOW(), NOW())"; 
+        $sql = "INSERT INTO " . Database::TEMPLATE_TABLE . " VALUES (NULL, 'Untitled Template',NULL,".$category.", ".$user_id.", NOW(), NOW())"; 
         $result = $this->connection->query($sql);   
         $newlyTemplateId = mysqli_insert_id($this->connection);
         $template_data = $this->findByField("template_id",$newlyTemplateId);
@@ -115,6 +115,18 @@ class Template
             $records[] = $row;
         }
         return $records;
+    }
+    public function countTableRows() {
+        $sql = "SELECT COUNT(*) AS row_count FROM ".Database::TEMPLATE_TABLE;
+        $result = $this->connection->query($sql);
+        $data = $result->fetch_assoc()["row_count"];
+        return $data;
+    }
+    public function countCategoryTableRows() {
+        $sql = "SELECT COUNT(*) AS row_count FROM ".Database::CATEGORY_TABLE;
+        $result = $this->connection->query($sql);
+        $data = $result->fetch_assoc()["row_count"];
+        return $data;
     }
 }
 ?>
