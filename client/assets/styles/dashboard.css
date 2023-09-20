@@ -13,11 +13,21 @@
 }
 
 #user-template-grid a h5 {
-    font-size: 24px;
-    font-weight: bolder;
+    font-size: 20px;
+    font-weight: bold;
 }
 
 #user-template-grid a h6 {
-    font-size: 18.72px;
+    font-size: 18px;
     font-weight: lighter;
+}
+
+#user-template-grid a footer {
+    display: flex;
+    justify-content: space-between;
+}
+
+#user-template-grid a footer div {
+    display: flex;
+    gap: 5px;
 }

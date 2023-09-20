@@ -29,3 +29,32 @@
     width: calc(100% - var(--sidebar-width) - var(--dashboard-spacing));
     /* height: calc(100vh - var(--navbar-height) - var(--dashboard-spacing) * 2); */
 }
+
+#detail-bar {
+    width: var(--sidebar-width);
+    margin: 0 var(--dashboard-spacing) var(--dashboard-spacing) 0;
+    position: fixed;
+    height: calc(100vh - var(--navbar-height) - var(--dashboard-spacing) * 3);
+    outline: 1px solid black;
+    border-radius: 10px;
+    padding: 10px;
+    /* display: flex;
+    flex-direction: column;
+    gap: 10px; */
+}
+
+#view-container {
+    outline: 1px solid black;
+    position: relative;
+    overflow: hidden;
+}
+
+#view-container[data-template-category="resume"] {
+    width: 8.27in;
+    height: 11.7in;
+}
+
+#view-container[data-template-category="visiting-card"] {
+    width: 3.5in;
+    height: 2in;
+}

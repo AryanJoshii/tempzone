@@ -4,14 +4,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>TempZone</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
 <body>
-    <div class="navbar text-center text-2xl">
-        HELLO WORLD
+    <div class="p-[20px]">
+        <section class="flex flex-col gap-4 h-screen items-center justify-center">
+            <h1 class="text-5xl font-bold">TempZone</h1>
+            <p class="text-xl font-normal tracking-widest">A simple tool to create your templates.</p>
+            <p class="text-lg font-light">Create your first template by <a
+                    class="hover:text-blue-600 hover:underline font-medium" href="login.html">Login</a> or <a
+                    class="hover:text-blue-600 hover:underline font-medium" href="register.html">Register</a></p>
+        </section>
+        <section class="flex flex-col gap-4">
+            <h1 class="text-5xl flex-1">We offer...</h1>
+            <div class=" grid grid-cols-4 gap-5">
+                <div class="flex flex-col outline outline-1 rounded-md items-center p-5 gap-2">
+                    <div class="outline-1 outline py-4 w-full rounded-md">
+                        <img src="assets/icons/update.svg" class="mx-auto" width="100" height="100" alt="" srcset="">
+                    </div>
+                    <p>Make template creation and updates a walk in the park.</p>
+                </div>
+                <div class="flex flex-col outline outline-1 rounded-md items-center p-5 gap-2">
+                    <div class="outline-1 outline py-4 w-full rounded-md">
+                        <img src="assets/icons/print.svg" class="mx-auto" width="100" height="100" alt="" srcset="">
+                    </div>
+                    <p>Print templates as they should be and save them as PDFs.</p>
+                </div>
+                <div class="flex flex-col outline outline-1 rounded-md items-center p-5 gap-2">
+                    <div class="outline-1 outline py-4 w-full rounded-md">
+                        <img src="assets/icons/earth.svg" class="mx-auto" width="100" height="100" alt="" srcset="">
+                    </div>
+                    <p>Find inspiration in templates shared by fellow users.</p>
+                </div>
+            </div>
+        </section>
+        <footer class="mt-10 text-center">
+            Developed by <a class="hover:text-blue-600 hover:underline font-medium" href="https://github.com/AryanJoshii">Aryan Joshi</a>,
+            <a class="hover:text-blue-600 hover:underline font-medium" href="https://github.com/Bhagyeshbhalodiya">Bhagyesh Bhalodiya</a>,
+            <a class="hover:text-blue-600 hover:underline font-medium" href="https://github.com/savaliyakeval">Keval Savaliya</a> 
+            &#169; <span id="copyright-year"></span>
+        </footer>
     </div>
+    <script>
+        const copyrightYear = document.getElementById("copyright-year");
+
+        copyrightYear.innerText = new Date().getFullYear();
+    </script>
 </body>
 
 </html>

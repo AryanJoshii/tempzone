@@ -21,4 +21,8 @@ if(array_key_exists("Authorization", $headers)){
         http_response_code(404);
     }
     echo json_encode($data);
+} else {
+    $data = [ 'status' => 401, 'data' => json_decode("{}"),'msg' => "Unauthorized",'error' => "Unauthorized" ];
+    http_response_code(401);
+    echo json_encode($data);
 }

@@ -30,6 +30,7 @@ async function saveTemplate() {
             body: JSON.stringify(data)
         });
         const templateData = await templateResponse.json();
+        location.reload();
     } catch (error) {
         console.log(error);
     }

@@ -11,14 +11,14 @@ async function submitLoginForm(e) {
         dataObj[key] = value;
     });
     try {
-        const loginResponse = await fetch(`${API_URL}/user/login.php`, {
+        const loginResponse = await fetch(`${API_URL}/admin/user/login.php`, {
             mode: "no-cors",
             method: "POST",
             body: JSON.stringify(dataObj)
         })
         const responseData = await loginResponse.json();
         localStorage.setItem("token", responseData.data.token);
-        window.location.href = "dashboard.html";
+        location.href = "dashboard.html";
     } catch (error) {
         console.log(error);
     }

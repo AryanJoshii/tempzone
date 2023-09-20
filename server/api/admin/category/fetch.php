@@ -5,22 +5,19 @@ error_reporting(E_ALL);
 
 require_once "../../../model/user.php";
 
-$user = new User();
+$database = new User();
 header('Content-type: application/json');
 
 $request = json_decode(file_get_contents('php://input'), true);
 $headers = getallheaders();
 
-// $request["token"]= "";
-// $request["template_id"] = 25;
-
-if(array_key_exists("Authorization", $headers)){
-    $response = $user->fetchAllUser($headers["Authorization"]);
+if(array_key_exists("Authorization", $headers)){    
+    $response = $database->fetchAllCategories($headers["Authorization"]);
     if(0 < count($response)){
-        $data = [ 'status' => 202, 'data' => $response,'msg' => "User Info Fetched Successful.", 'error' => 0 ];
+        $data = [ 'status' => 202, 'data' => $response,'msg' => "Categories Found.",'error' => 0 ];
         http_response_code(202);
     }else{
-        $data = [ 'status' => 404, 'data' => json_decode("[]"), 'msg' => "Error Occurce In Fetch Iser Info. Please try again.",'error' => 0 ];
+        $data = [ 'status' => 404, 'data' => json_decode("[]") ,'msg' => "No Categories Found",'error' => 0 ];
         http_response_code(404);
     }
     echo json_encode($data);
@@ -29,4 +26,3 @@ if(array_key_exists("Authorization", $headers)){
     http_response_code(401);
     echo json_encode($data);
 }
-?>
