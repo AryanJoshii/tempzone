@@ -15,7 +15,7 @@ async function saveTemplate() {
     let data = {
         template_data: {
             template_name: document.getElementById('template-name').value,
-            template_tags: JSON.stringify(childrenString),
+            template_tags: childrenString,
             template_id: url.searchParams.get('template-id')
         }
     }
@@ -30,10 +30,10 @@ async function saveTemplate() {
             body: JSON.stringify(data)
         });
         const templateData = await templateResponse.json();
+        location.reload();
     } catch (error) {
         console.log(error);
     }
-
 }
 
 async function fetchTemplate() {
@@ -48,13 +48,36 @@ async function fetchTemplate() {
             body: JSON.stringify({ template_id: url.searchParams.get("template-id") })
         });
         const templateFetchData = await templateFetchResponse.json();
-        console.log(templateFetchData.data.template_tags);
+
+        document.getElementById("template-name").value = templateFetchData.data.template_name;
+        document.getElementById("drop-container").innerHTML = templateFetchData.data.template_tags;
+        // console.log(JSON.parse(templateFetchData.data.template_tags));
     } catch (error) {
         console.log(error);
     }
 }
 
-document.getElementById('template-save-btn').addEventListener('click', saveTemplate)
+async function deleteTemplate() {
+    try {
+        let url = new URL(window.location.href);
+
+        const templateDeleteResponse = await fetch(`${API_URL}/template/delete.php`, {
+            // mode: "no-cors",
+            method: "POST",
+            headers: {
+                'Authorization': localStorage.getItem("token")
+            },
+            body: JSON.stringify({ template_id: url.searchParams.get("template-id") })
+        });
+        const templateDeleteData = await templateDeleteResponse.json();
+        location.href = "dashboard.html";
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+document.getElementById('template-save-btn').addEventListener('click', saveTemplate);
+document.getElementById('template-delete-btn').addEventListener('click', deleteTemplate);
 
 window.addEventListener("load", () => {
     generateTemplate();

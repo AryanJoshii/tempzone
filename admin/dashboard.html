@@ -5,10 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - TempZone Admin</title>
+    <script src="assets/scripts/auth/checkToken.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="assets/styles/global.css">
     <script src="assets/scripts/components/navbar.js"></script>
     <script src="assets/scripts/components/sidebar.js"></script>
+    <script type="module" src="assets/scripts/dashboard.js"></script>
 </head>
 
 <body>
@@ -16,12 +18,24 @@
         <div id="pages">
             <h1 class="text-2xl font-semibold mb-4">Welcome, Admin!</h1>
             <div class="grid grid-cols-3 gap-4">
-                <div class="">Lorem.</div>
-                <div class="">Eius?</div>
-                <div class="">Cumque?</div>
+                <div class="outline outline-1 rounded-[10px] p-2">
+                    <h1 class="text-2xl font-medium">Total Users</h1>
+                    <h3 id="site-user-count" class="text-xl">0</h3>
+                </div>
+                <div class="outline outline-1 rounded-[10px] p-2">
+                    <h1 class="text-2xl font-medium">Total Templates</h1>
+                    <h3 id="site-template-count" class="text-xl">0</h3>
+                </div>
+                <div class="outline outline-1 rounded-[10px] p-2">
+                    <h1 class="text-2xl font-medium">Total Categories</h1>
+                    <h3 id="site-category-count" class="text-xl">0</h3>
+                </div>
             </div>
         </div>
     </div>
+    <script>
+
+    </script>
 </body>
 
 </html>

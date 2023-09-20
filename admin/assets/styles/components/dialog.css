@@ -11,49 +11,143 @@ dialog::backdrop {
     background-color: rgba(0, 0, 0, 0.4);
 }
 
-#template-dialog[open] {
+#template-delete-dialog[open] {
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
 
-#template-dialog .dialog-header {
+#template-delete-dialog .dialog-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-#template-dialog .dialog-header h1 {
+#template-delete-dialog .dialog-header h1 {
     font-size: 32px;
     font-weight: bold;
 }
 
-#template-dialog .dialog-header button {
+#template-delete-dialog .dialog-header button {
     font-size: 32px;
 }
 
-#template-dialog .dialog-content {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 20px;
-}
-
-#template-dialog .dialog-content button {
+#template-delete-dialog .dialog-content {
     display: flex;
-    flex-direction: column;
-    outline: 2px solid black;
-    border-radius: 10px;
-    padding: 10px;
-    align-items: center;
     gap: 10px;
 }
 
-#template-dialog .dialog-content button img {
+#template-delete-dialog .dialog-content button {
+    display: flex;
+    flex: 1;
+    font-size: 20px;
+    text-transform: capitalize;
+    outline: 2px solid black;
+    border-radius: 10px;
+    padding: 10px;
+    justify-content: center;
+}
+
+#template-delete-dialog .dialog-content button img {
     flex: 1;
     width: 50px;
     height: 50px;
 }
 
-#template-dialog .dialog-content button h2 {
+#template-delete-dialog .dialog-content button h2 {
+    text-transform: capitalize;
+}
+
+#user-delete-dialog[open] {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+#user-delete-dialog .dialog-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#user-delete-dialog .dialog-header h1 {
+    font-size: 32px;
+    font-weight: bold;
+}
+
+#user-delete-dialog .dialog-header button {
+    font-size: 32px;
+}
+
+#user-delete-dialog .dialog-content {
+    display: flex;
+    gap: 10px;
+}
+
+#user-delete-dialog .dialog-content button {
+    display: flex;
+    flex: 1;
+    font-size: 20px;
+    text-transform: capitalize;
+    outline: 2px solid black;
+    border-radius: 10px;
+    padding: 10px;
+    justify-content: center;
+}
+
+#user-delete-dialog .dialog-content button img {
+    flex: 1;
+    width: 50px;
+    height: 50px;
+}
+
+#user-delete-dialog .dialog-content button h2 {
+    text-transform: capitalize;
+}
+
+#category-delete-dialog[open] {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+#category-delete-dialog .dialog-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#category-delete-dialog .dialog-header h1 {
+    font-size: 32px;
+    font-weight: bold;
+}
+
+#category-delete-dialog .dialog-header button {
+    font-size: 32px;
+}
+
+#category-delete-dialog .dialog-content {
+    display: flex;
+    gap: 10px;
+}
+
+#category-delete-dialog .dialog-content button {
+    display: flex;
+    flex: 1;
+    font-size: 20px;
+    text-transform: capitalize;
+    outline: 2px solid black;
+    border-radius: 10px;
+    padding: 10px;
+    justify-content: center;
+}
+
+#category-delete-dialog .dialog-content button img {
+    flex: 1;
+    width: 50px;
+    height: 50px;
+}
+
+#category-delete-dialog .dialog-content button h2 {
     text-transform: capitalize;
 }

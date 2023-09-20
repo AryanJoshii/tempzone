@@ -4,41 +4,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Users - TempZone Admin</title>
+    <title>Categories - TempZone Admin</title>
     <script src="assets/scripts/auth/checkToken.js"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="assets/styles/global.css">
+    <script src="https://cdn.tailwindcss.com"></script>
     <script src="assets/scripts/components/navbar.js"></script>
     <script src="assets/scripts/components/sidebar.js"></script>
-    <script type="module" src="assets/scripts/users.js"></script>
-    <script type="module" src="assets/scripts/components/userDeleteDialog.js"></script>
+    <script type="module" src="assets/scripts/categories.js"></script>
+    <script type="module" src="assets/scripts/components/categoryDeleteDialog.js"></script>
 </head>
 
 <body>
     <div id="container">
         <div id="pages">
-            <h1 class="text-2xl font-semibold mb-4">Users</h1>
+            <h1 class="text-2xl font-semibold mb-4">Categories</h1>
             <table>
                 <thead>
                     <th>id</th>
                     <th>Name</th>
-                    <th>email</th>
-                    <th>registered at</th>
+                    <th>created at</th>
                     <th>updated at</th>
                     <th>action</th>
                 </thead>
-                <tbody id="user-table">
+                <tbody id="category-table">
                 </tbody>
                 <tfoot>
                     <tr>
-                        <th scope="row" colspan="2">Total Users</th>
-                        <td id="total-data" colspan="4">0</td>
+                        <th scope="row" colspan="2">Total Categories</th>
+                        <td id="total-data" colspan="3">0</td>
                     </tr>
                 </tfoot>
             </table>
         </div>
     </div>
-    <dialog id="user-delete-dialog">
+    <dialog id="category-delete-dialog">
         <header class="dialog-header">
             <h1 class="dialog-header">Are you sure!?</h1>
             <button class="close-dialog-btn">X</button>
@@ -47,7 +46,7 @@
             <button class="close-dialog-btn">
                 no
             </button>
-            <button id="confirm-delete-user">
+            <button id="confirm-delete-category">
                 yes
             </button>
         </div>

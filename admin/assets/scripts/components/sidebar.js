@@ -13,6 +13,11 @@ const routes = [
         name: "Templates",
         icon: "assets/icons/templates.svg",
         link: "/tempzone/admin/templates.html"
+    },
+    {
+        name: "Categories",
+        icon: "assets/icons/category.svg",
+        link: "/tempzone/admin/categories.html"
     }
 ]
 

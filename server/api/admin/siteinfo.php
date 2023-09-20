@@ -14,7 +14,7 @@ header('Content-type: application/json');
 $request = json_decode(file_get_contents('php://input'), true);
 $headers = getallheaders();
 
-if(array_key_exists("Authorization", $headers) && isset($request["template_category"])){
+if(array_key_exists("Authorization", $headers)){
     $templates_count = (int)$template->countTableRows();
     $categories_count = (int)$template->countCategoryTableRows();
     $users_count = (int)$user->countTableRows();

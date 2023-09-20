@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View - TempZone</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="assets/styles/global.css">
+    <script src="assets/scripts/components/navbar.js"></script>
+    <script src="assets/scripts/components/template-dialog.js"></script>
+</head>
+
+<body>
+    <div id="container">
+        <aside id="detail-bar" class="fixed w-[200px] outline outline-1">
+            <div class="font-bold text-4xl cursor-pointer" onclick="history.back()">&larr;</div>
+            <h1 id="template-name" class="text-xl"></h1>
+            <h5 id="template-creator" class="text-lg"></h5>
+            <p id="template-category" class=""></p>
+            <p id="template-created" class=""></p>
+            <p id="template-updated" class=""></p>
+        </aside>
+        <div id="pages">
+            <div id="view-container">
+            </div>
+        </div>
+    </div>
+    <script>
+        const dateOptions = { day: "numeric", month: "numeric", year: "numeric", hour: "numeric", minute: "numeric", dayperiod: "short" }
+
+
+        function generateTemplate() {
+            let url = new URL(window.location.href);
+            const templateContainer = document.getElementById("view-container");
+
+            templateContainer.dataset.templateCategory = url.searchParams.get("template-category");
+
+        }
+
+        async function fetchTemplate() {
+            try {
+                let url = new URL(window.location.href);
+                const templateFetchResponse = await fetch(`http://localhost/tempzone/server/api/template/fetch.php`, {
+                    // mode: "no-cors",
+                    method: "POST",
+                    headers: {
+                        'Authorization': localStorage.getItem("token")
+                    },
+                    body: JSON.stringify({ template_id: url.searchParams.get("template-id") })
+                });
+                const templateFetchData = await templateFetchResponse.json();
+
+                document.getElementById("template-name").innerText = templateFetchData.data.template_name;
+                document.getElementById("template-creator").innerText = templateFetchData.data.template_owner;
+                document.getElementById("template-category").innerText = templateFetchData.data.template_category;
+                document.getElementById("template-created").innerText = new Date(templateFetchData.data.created_at).toLocaleString("en-IN", dateOptions);
+                document.getElementById("template-updated").innerText = new Date(templateFetchData.data.updated_at).toLocaleString("en-IN", dateOptions);
+                document.getElementById("view-container").innerHTML = templateFetchData.data.template_tags;
+            } catch (error) {
+                console.log(error);
+            }
+        }
+
+        window.addEventListener("load", () => {
+            generateTemplate();
+            fetchTemplate();
+        })
+    </script>
+</body>
+
+</html>

@@ -4,6 +4,7 @@ function drag(e) {
 }
 
 function drop(e) {
+    console.log(e);
     const dropContainer = document.getElementById("drop-container");
     const draggedElement = document.getElementById(e.dataTransfer.getData("id")).cloneNode(true);
 

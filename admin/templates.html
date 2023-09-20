@@ -5,18 +5,54 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Templates - TempZone Admin</title>
+    <script src="assets/scripts/auth/checkToken.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="assets/styles/global.css">
     <script src="assets/scripts/components/navbar.js"></script>
     <script src="assets/scripts/components/sidebar.js"></script>
+    <script type="module" src="assets/scripts/templates.js"></script>
+    <script type="module" src="assets/scripts/components/templateDeleteDialog.js"></script>
 </head>
 
 <body>
     <div id="container">
         <div id="pages">
-
+            <h1 class="text-2xl font-semibold mb-4">Templates</h1>
+            <table>
+                <thead>
+                    <th>id</th>
+                    <th>Name</th>
+                    <th>Category</th>
+                    <th>creator</th>
+                    <th>created at</th>
+                    <th>updated at</th>
+                    <th>action</th>
+                </thead>
+                <tbody id="template-table">
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th scope="row" colspan="2">Total Templates</th>
+                        <td id="total-data" colspan="5">0</td>
+                    </tr>
+                </tfoot>
+            </table>
         </div>
     </div>
+    <dialog id="template-delete-dialog">
+        <header class="dialog-header">
+            <h1 class="dialog-header">Are you sure!?</h1>
+            <button class="close-dialog-btn">X</button>
+        </header>
+        <div class="dialog-content">
+            <button class="close-dialog-btn">
+                no
+            </button>
+            <button id="confirm-delete-template">
+                yes
+            </button>
+        </div>
+    </dialog>
 </body>
 
 </html>

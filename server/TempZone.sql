@@ -26,10 +26,12 @@ DROP TABLE IF EXISTS `category`;
 CREATE TABLE `category` (
   `category_id` int NOT NULL AUTO_INCREMENT,
   `category_name` varchar(256) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`category_id`)
 );
 
-INSERT INTO `category` VALUES (NULL, 'resume'), (NULL, 'visiting-card');
+INSERT INTO `category` VALUES (NULL, 'resume', NOW(), NOW()), (NULL, 'visiting-card', NOW(), NOW());
 
 
 DROP TABLE IF EXISTS `registered_users`;

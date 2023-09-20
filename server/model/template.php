@@ -33,7 +33,11 @@ class Template
     public function getTemplates($token){
         $decryptedData = $this->database->decryptToken($token);
         $user_id = $decryptedData[0];
-        $sql = "SELECT * FROM " . Database::TEMPLATE_TABLE ;
+        // $sql = "SELECT * FROM " . Database::TEMPLATE_TABLE ;
+        $sql = "SELECT ".Database::TEMPLATE_TABLE.".*, ".Database::CATEGORY_TABLE.".category_name AS template_category, ".Database::USER_TABLE.".user_name AS template_owner 
+                FROM ".Database::TEMPLATE_TABLE."
+                LEFT JOIN ".Database::CATEGORY_TABLE." ON " .Database::TEMPLATE_TABLE.".template_category = ".Database::CATEGORY_TABLE.".category_id 
+                LEFT JOIN ".Database::USER_TABLE." ON " .Database::TEMPLATE_TABLE.".template_owner = ".Database::USER_TABLE.".user_id";
         return $this->database->select($sql);
     }
     public function deleteTemplateByadmin($token,$template_id){
@@ -76,7 +80,12 @@ class Template
     public function fetchTemplate($token, $template_id){
         $decryptedData = $this->database->decryptToken($token);
         $user_id = $decryptedData[0];
-        $sql ="SELECT * FROM ".Database::TEMPLATE_TABLE." WHERE `template_id` =".$template_id;
+        // $sql ="SELECT * FROM ".Database::TEMPLATE_TABLE." WHERE `template_id` =".$template_id;
+        $sql = "SELECT ".Database::TEMPLATE_TABLE.".*, ".Database::CATEGORY_TABLE.".category_name AS template_category, ".Database::USER_TABLE.".user_name AS template_owner 
+                FROM ".Database::TEMPLATE_TABLE."
+                LEFT JOIN ".Database::CATEGORY_TABLE." ON " .Database::TEMPLATE_TABLE.".template_category = ".Database::CATEGORY_TABLE.".category_id 
+                LEFT JOIN ".Database::USER_TABLE." ON " .Database::TEMPLATE_TABLE.".template_owner = ".Database::USER_TABLE.".user_id 
+                WHERE `template_id` =".$template_id;
         $result = $this->connection->query($sql);
         $records = [];
         while ($row = $result->fetch_assoc()) {

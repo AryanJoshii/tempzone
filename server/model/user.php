@@ -22,12 +22,37 @@ class User
         $sql = "SELECT * FROM " . Database::USER_TABLE. " WHERE user_id=".$user_id;
         return $this->select($sql);
     }
+    public function fetchCategory($token,$category_id)
+    {
+        $decryptedData = $this->database->decryptToken($token);
+        $admin_id = $decryptedData[0];
+        $sql = "SELECT * FROM " . Database::CATEGORY_TABLE. " WHERE category_id=".$category_id;
+        return $this->select($sql);
+    }
     public function fetchAllUser($token)
     {
         $decryptedData = $this->database->decryptToken($token);
         $admin_id = $decryptedData[0];
         $sql = "SELECT * FROM " . Database::USER_TABLE;
         return $this->select($sql);
+    }
+    public function fetchAllCategories($token)
+    {
+        $decryptedData = $this->database->decryptToken($token);
+        $admin_id = $decryptedData[0];
+        $sql = "SELECT * FROM " . Database::CATEGORY_TABLE;
+        return $this->select($sql);
+    }
+    public function deleteCategory($token,$category_id)
+    {
+        $decryptedData = $this->database->decryptToken($token);
+        $admin_id = $decryptedData[0];
+        $category = $this->fetchCategory($token,$category_id);
+        $sql = "DELETE FROM  " . Database::CATEGORY_TABLE. " WHERE category_id=".$category_id;
+        if($this->database->onlyExe($sql)){
+            return $category;
+        }
+        return false;
     }
     public function deleteUser($token,$user_id)
     {
@@ -55,7 +80,7 @@ class User
     public function adminUserLogin($email, $password)
     {
         $passwordHash = md5($password);
-        $sql = "SELECT * FROM admin WHERE email = '$email' AND password = '$passwordHash'";
+        $sql = "SELECT * FROM admin WHERE email = '$email' AND password = '$password'";
         return $this->select($sql);
     }
     public function encryptToken($data)

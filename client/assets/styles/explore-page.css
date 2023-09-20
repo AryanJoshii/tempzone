@@ -4,7 +4,7 @@
     gap: 20px;
 }
 
-#explore-grid div {
+#explore-grid a {
     display: flex;
     flex-direction: column;
     outline: 1px solid black;
@@ -12,12 +12,22 @@
     border-radius: 10px;
 }
 
-#explore-grid div h5 {
-    font-size: 24px;
-    font-weight: bolder;
+#explore-grid a h5 {
+    font-size: 20px;
+    font-weight: bold;
 }
 
-#explore-grid div h6 {
-    font-size: 18.72px;
+#explore-grid a h6 {
+    font-size: 18px;
     font-weight: lighter;
+}
+
+#explore-grid a footer {
+    display: flex;
+    justify-content: space-between;
+}
+
+#explore-grid a footer div {
+    display: flex;
+    gap: 5px;
 }

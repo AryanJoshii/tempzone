@@ -16,16 +16,7 @@ $headers = getallheaders();
 
 if(array_key_exists("Authorization", $headers) && isset($request["template_id"])){
     $response = $database->fetchTemplate($headers["Authorization"],$request["template_id"]);
-    // $resData = array(
-    //     "template_id" => $response[0]["template_id"], 
-    //     "template_name" => $response[0]["template_name"], 
-    //     "template_tags" => json_decode($response[0]["template_tags"], true), 
-    //     "template_category" => $response[0]["template_category"], 
-    //     "template_owner" => $response[0]["template_owner"], 
-    //     "created_at" => $response[0]["created_at"], 
-    //     "updated_at" => $response[0]["updated_at"] 
-    // );
-    // print_r(json_decode($response[0]["template_tags"], true)->fetch_assoc());
+    
     if(0 < count($response)){
         $data = [ 'status' => 202, 'data' => $response[0],'msg' => "Template Fetched Successful.", 'error' => 0 ];
         http_response_code(202);

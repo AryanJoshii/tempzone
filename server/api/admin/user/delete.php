@@ -15,10 +15,10 @@ $headers = getallheaders();
 // $request["token"]= "";
 // $request["template_id"] = 25;
 
-$headers["Authorization"] = "Sds";
-$request["user_id"] = 29;
+// $headers["Authorization"] = "Sds";
+// $request["user_id"] = 29;
 
-// if(array_key_exists("Authorization", $headers) && isset($request["user_id"])){
+if(array_key_exists("Authorization", $headers) && isset($request["user_id"])){
     $response = $user->deleteUser($headers["Authorization"],$request["user_id"]);
     if($response){
         $data = [ 'status' => 202, 'data' => $response[0],'msg' => "User Delete Fetched Successful.", 'error' => 0 ];
@@ -28,9 +28,9 @@ $request["user_id"] = 29;
         http_response_code(404);
     }
     echo json_encode($data);
-// } else {
-//     $data = [ 'status' => 401, 'data' => json_decode("{}"),'msg' => "Unauthorized",'error' => "Unauthorized" ];
-//     http_response_code(401);
-//     echo json_encode($data);
-// }
+} else {
+    $data = [ 'status' => 401, 'data' => json_decode("{}"),'msg' => "Unauthorized",'error' => "Unauthorized" ];
+    http_response_code(401);
+    echo json_encode($data);
+}
 ?>
