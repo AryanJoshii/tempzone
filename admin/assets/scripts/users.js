@@ -16,10 +16,17 @@ async function fetchUsers() {
             }
         });
         const userList = await userResponse.json();
+        if (!userResponse.ok) {
+            throw userList;
+        }
         appendTableRows(userList.data);
         count.innerText = userList.data.length;
     } catch (error) {
-        console.log(error);
+        if (error.status === 401) {
+            location.href = "login.html";
+            localStorage.removeItem("token");
+        }
+        console.log(error.msg);
     }
 }
 

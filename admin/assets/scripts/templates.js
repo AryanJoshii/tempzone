@@ -16,10 +16,17 @@ async function fetchTemplates() {
             }
         });
         const templateList = await templateResponse.json();
+        if (!templateResponse.ok) {
+            throw templateList;
+        }
         appendTableRows(templateList.data);
         count.innerText = templateList.data.length;
     } catch (error) {
-        console.log(error);
+        if (error.status === 401) {
+            location.href = "login.html";
+            localStorage.removeItem("token");
+        }
+        console.log(error.msg);
     }
 }
 

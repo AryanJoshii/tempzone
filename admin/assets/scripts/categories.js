@@ -16,10 +16,17 @@ async function fetchCategories() {
             }
         });
         const categoryList = await categoryResponse.json();
+        if (!categoryResponse.ok) {
+            throw categoryList;
+        }
         appendTableRows(categoryList.data);
         count.innerText = categoryList.data.length;
     } catch (error) {
-        console.log(error);
+        if (error.status === 401) {
+            location.href = "login.html";
+            localStorage.removeItem("token");
+        }
+        console.log(error.msg);
     }
 }
 

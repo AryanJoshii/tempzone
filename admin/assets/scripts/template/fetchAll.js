@@ -12,9 +12,16 @@ async function fetchTemplates() {
             }
         });
         const templateList = await templateResponse.json();
+        if (!templateResponse.ok) {
+            throw templateList;
+        }
         appendTemplates(templateList.data);
     } catch (error) {
-        console.log(error);
+        if (error.status === 401) {
+            location.href = "login.html";
+            localStorage.removeItem("token");
+        }
+        console.log(error.msg);
     }
 }
 

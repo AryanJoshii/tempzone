@@ -17,9 +17,12 @@ async function submitLoginForm(e) {
             body: JSON.stringify(dataObj)
         })
         const responseData = await loginResponse.json();
+        if(!loginResponse.ok) {
+            throw responseData;
+        }
         localStorage.setItem("token", responseData.data.token);
         window.location.href = "dashboard.html";
     } catch (error) {
-        console.log(error);
+        console.log(error.msg);
     }
 }

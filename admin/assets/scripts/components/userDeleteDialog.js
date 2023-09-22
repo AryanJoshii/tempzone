@@ -27,10 +27,17 @@ async function deleteUser() {
             body: JSON.stringify({ user_id: userId })
         });
         const deleteUserData = await deleteUserResponse.json();
+        if (!deleteUserResponse.ok) {
+            throw deleteUserData;
+        }
         closeUserDeleteDialog();
         location.reload();
     } catch (error) {
-        console.log(error);
+        if (error.status === 401) {
+            location.href = "login.html";
+            localStorage.removeItem("token");
+        }
+        console.log(error.msg);
     }
 }
 

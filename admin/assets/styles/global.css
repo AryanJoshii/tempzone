@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+@import "output.css";
 @import "components/dialog.css";
 @import "components/navbar.css";
 @import "components/sidebar.css";

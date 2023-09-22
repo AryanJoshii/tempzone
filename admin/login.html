@@ -20,7 +20,7 @@
                 <label for="email" class="mt-5">Email *</label>
                 <input class="p-[5px] rounded-md" type="email" name="email" id="email" required />
                 <label for="password" class="mt-5">Password *</label>
-                <input class="p-[5px] rounded-md" type="password" name="password" id="password" required />
+                <input class="p-[5px] rounded-md" type="password" pattern=".{6,}" title="Min 6 characters required" name="password" id="password" required />
                 <button type="submit" class="mt-5 bg-blue-400 text-white py-1 rounded-md">Login</button>
             </form>
         </div>
