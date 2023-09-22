@@ -14,6 +14,9 @@ async function fetchSiteData() {
             }
         });
         const siteInfoData = await siteInfoResponse.json();
+        if (!siteInfoResponse.ok) {
+            throw siteInfoData;
+        }
         userCount.dataset.siteUserCount = siteInfoData.data.users;
         templateCount.dataset.siteTemplateCount = siteInfoData.data.templates;
         categoryCount.dataset.categoryCount = siteInfoData.data.categories;
@@ -21,7 +24,11 @@ async function fetchSiteData() {
         siteTemplateCount();
         siteCategoryCount();
     } catch (error) {
-        console.log(error);
+        if (error.status === 401) {
+            location.href = "login.html";
+            localStorage.removeItem("token");
+        }
+        console.log(error.msg);
     }
 }
 

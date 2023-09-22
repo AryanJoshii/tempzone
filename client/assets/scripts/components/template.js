@@ -30,9 +30,16 @@ async function saveTemplate() {
             body: JSON.stringify(data)
         });
         const templateData = await templateResponse.json();
+        if (!templateResponse.ok) {
+            throw templateData;
+        }
         location.reload();
     } catch (error) {
-        console.log(error);
+        if (error.status === 401) {
+            location.href = "login.html";
+            localStorage.removeItem("token");
+        }
+        console.log(error.msg);
     }
 }
 
@@ -48,12 +55,19 @@ async function fetchTemplate() {
             body: JSON.stringify({ template_id: url.searchParams.get("template-id") })
         });
         const templateFetchData = await templateFetchResponse.json();
+        if (!templateFetchResponse.ok) {
+            throw templateFetchData;
+        }
 
         document.getElementById("template-name").value = templateFetchData.data.template_name;
         document.getElementById("drop-container").innerHTML = templateFetchData.data.template_tags;
         // console.log(JSON.parse(templateFetchData.data.template_tags));
     } catch (error) {
-        console.log(error);
+        if (error.status === 401) {
+            location.href = "login.html";
+            localStorage.removeItem("token");
+        }
+        console.log(error.msg);
     }
 }
 
@@ -70,9 +84,17 @@ async function deleteTemplate() {
             body: JSON.stringify({ template_id: url.searchParams.get("template-id") })
         });
         const templateDeleteData = await templateDeleteResponse.json();
+        if (!templateDeleteResponse.ok) {
+            throw templateDeleteData;
+        }
+
         location.href = "dashboard.html";
     } catch (error) {
-        console.log(error);
+        if (error.status === 401) {
+            location.href = "login.html";
+            localStorage.removeItem("token");
+        }
+        console.log(error.msg);
     }
 }
 

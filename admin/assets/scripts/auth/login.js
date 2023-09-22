@@ -17,9 +17,16 @@ async function submitLoginForm(e) {
             body: JSON.stringify(dataObj)
         })
         const responseData = await loginResponse.json();
+        if (!loginResponse.ok) {
+            throw responseData;
+        }
         localStorage.setItem("token", responseData.data.token);
         location.href = "dashboard.html";
     } catch (error) {
-        console.log(error);
+        if (error.status === 401) {
+            location.href = "login.html";
+            localStorage.removeItem("token");
+        }
+        console.log(error.msg);
     }
 }

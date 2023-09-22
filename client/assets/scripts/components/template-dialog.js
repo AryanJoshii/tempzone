@@ -82,10 +82,17 @@ async function createNewTemplate(template) {
             body: JSON.stringify({ template_category: template.dataset.templateCategory })
         });
         const templateData = await createTemplate.json();
+        if (!createTemplate.ok) {
+            throw templateData;
+        }
 
         window.location.href = `/tempzone/client/editor.html?template-category=${template.dataset.templateName}&template-id=${templateData.data.template_id}`;
     } catch (error) {
-        console.log(error);
+        if (error.status === 401) {
+            location.href = "login.html";
+            localStorage.removeItem("token");
+        }
+        console.log(error.msg);
     }
 }
 

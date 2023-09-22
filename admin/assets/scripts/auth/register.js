@@ -18,13 +18,15 @@ async function submitLoginForm(e) {
             body: JSON.stringify(dataObj)
         });
         const responseData = await loginResponse.json();
-        if (responseData.status == 200) {
-            const userData = responseData.data;
-            window.location.href = "login.html"
+        if (!loginResponse.ok) {
+            throw responseData;
         }
-        alert(responseData.msg)
-
+        location.href = "dashboard.html";
     } catch (error) {
-        console.log(error);
+        if (error.status === 401) {
+            location.href = "login.html";
+            localStorage.removeItem("token");
+        }
+        console.log(error.msg);
     }
 }

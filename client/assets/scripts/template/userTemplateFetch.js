@@ -17,10 +17,17 @@ async function fetchTemplates() {
         });
         const templateList = await templateResponse.json();
         countDiv.dataset.templateCount = templateList.data.length;
+        if (!templateResponse.ok) {
+            throw templateList;
+        }
         appendTemplates(templateList.data);
         userTemplateCount();
     } catch (error) {
-        console.log(error);
+        if (error.status === 401) {
+            location.href = "login.html";
+            localStorage.removeItem("token");
+        }
+        console.log(error.msg);
     }
 }
 
@@ -45,7 +52,7 @@ function appendTemplates(templates) {
         let createdDate = document.createElement('p');
         createdDate.innerText = new Date(template.created_at).toLocaleString("en-IN", dateOptions);
         createdAtDiv.append(createdIcon, createdDate);
-        
+
         let updatedAtDiv = document.createElement('div');
         let updatedIcon = document.createElement('img');
         updatedIcon.src = "assets/icons/update.svg";

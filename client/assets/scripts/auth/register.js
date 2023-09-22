@@ -12,15 +12,18 @@ async function submitLoginForm(e) {
     });
 
     try {
-        const loginResponse = await fetch(`${API_URL}/user/register.php`, {
+        const registerResponse = await fetch(`${API_URL}/user/register.php`, {
             mode: "no-cors",
             method: "POST",
             body: JSON.stringify(dataObj)
         });
-        const responseData = await loginResponse.json();
+        const responseData = await registerResponse.json();
+        if(!registerResponse.ok) {
+            throw responseData;
+        }
         localStorage.setItem("token", responseData.data.token);
         window.location.href = "dashboard.html";
     } catch (error) {
-        console.log(error);
+        console.log(error.msg);
     }
 }

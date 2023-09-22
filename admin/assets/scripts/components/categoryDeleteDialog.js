@@ -27,10 +27,17 @@ async function deleteCategory() {
             body: JSON.stringify({ category_id: categoryId })
         });
         const deleteCategoryData = await deleteCategoryResponse.json();
+        if (!deleteCategoryResponse.ok) {
+            throw deleteCategoryData;
+        }
         closeCategoryDeleteDialog();
         location.reload();
     } catch (error) {
-        console.log(error);
+        if (error.status === 401) {
+            location.href = "login.html";
+            localStorage.removeItem("token");
+        }
+        console.log(error.msg);
     }
 }
 
